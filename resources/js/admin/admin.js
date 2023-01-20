@@ -1,6 +1,7 @@
-window.$ = window.jquery = require('jquery');
-require('bootstrap/dist/js/bootstrap.min');
+window.$ = window.jQuery = require('jquery');
+require('bootstrap/dist/js/bootstrap.bundle');
 require('jquery.easing');
+require('chart.js');
 (function($) {
     "use strict"; // Start of use strict
 
@@ -57,5 +58,3 @@ require('jquery.easing');
     });
 
 })(jQuery); // End of use strict
-
-require('chart.js');

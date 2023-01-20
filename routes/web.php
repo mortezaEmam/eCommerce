@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'salame laravel';
+    return view('admin.layouts.admin');
 });
