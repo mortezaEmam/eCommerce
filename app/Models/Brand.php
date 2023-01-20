@@ -20,4 +20,8 @@ class Brand extends Model
             ]
         ];
     }
+    public function getIsActiveAttribute($is_active)
+    {
+        return $is_active ? 'فعال' :'غیرفعال';
+    }
 }
