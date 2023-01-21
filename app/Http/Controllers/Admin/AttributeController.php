@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Brand;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 
-class BrandController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::query()->latest()->paginate(20);
-        return view('admin.brands.index', compact('brands'));
+        //
     }
 
     /**
@@ -26,74 +25,66 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brands.create');
+        return view('admin.attributes.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
         ]);
-        Brand::query()->create([
+        Attribute::query()->create([
             'name' => $request->name,
-            'is_active' => $request->is_active,
         ]);
-        alert()->success('با تشکر', 'برند شما با موفقیت ایجاد شد');
+        alert()->success('با تشکر', 'ویژگی شما با موفقیت ایجاد شد');
         return redirect()->route('admin.brands.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Brand $brand
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show($id)
     {
-        return view('admin.brands.show', compact('brand'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Brand $brand
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit($id)
     {
-        return view('admin.brands.edit', compact('brand'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Brand $brand
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-        Brand::query()->find($brand->id)->update([
-            'name' => $request->name,
-            'is_active' => $request->is_active,
-        ]);
-        alert()->success('با تشکر', 'برند شما با موفقیت ویرایش شد');
-        return redirect()->route('admin.brands.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
