@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>تاریخ ایجاد</label>
-                    <input class="form-control" value="{{$brand->created_at}}" type="text" disabled>
+                    <input class="form-control" value="{{verta($brand->created_at)}}" type="text" disabled>
                 </div>
                 <br>
             </div>
