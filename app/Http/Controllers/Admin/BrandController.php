@@ -44,7 +44,7 @@ class BrandController extends Controller
             'name' => $request->name,
             'is_active' => $request->is_active,
         ]);
-        alert()->success('با تشکر','برند شما با موفقیت ثبت شد');
+        alert()->success('با تشکر', 'برند شما با موفقیت ثبت شد');
         return redirect()->route('admin.brands.index');
     }
 
@@ -56,30 +56,38 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        return view('admin.brands.show' , compact('brand'));
+        return view('admin.brands.show', compact('brand'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Brand $brand)
     {
-        //
+        return view('admin.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        Brand::query()->find($brand->id)->update([
+            'name' => $request->name,
+            'is_active' => $request->is_active,
+        ]);
+        alert()->success('با تشکر', 'برند شما با موفقیت ویرایش شد');
+        return redirect()->route('admin.brands.index');
     }
 
     /**

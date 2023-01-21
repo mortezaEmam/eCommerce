@@ -23,14 +23,6 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        لورم ایپسوم
-    </div>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
         فروشگاه
     </div>
 

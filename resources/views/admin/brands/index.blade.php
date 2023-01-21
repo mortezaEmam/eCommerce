@@ -42,7 +42,10 @@
                                 {{$brand->is_active}}
                             </th>
                             <th>
-                                <a class="btn btn-outline-success" href="{{route('admin.brands.show',['brand' => $brand->id])}}">نمایش</a>
+                                <a class="btn btn-outline-success"
+                                   href="{{route('admin.brands.show',['brand' => $brand->id])}}">نمایش</a>
+                                <a class="btn btn-outline-info"
+                                   href="{{route('admin.brands.edit',['brand' => $brand->id])}}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach
