@@ -51,12 +51,12 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Brand $brand)
     {
-        //
+        return view('admin.brands.show' , compact('brand'));
     }
 
     /**

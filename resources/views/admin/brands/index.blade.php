@@ -42,7 +42,7 @@
                                 {{$brand->is_active}}
                             </th>
                             <th>
-                                <span>----</span>
+                                <a class="btn btn-outline-success" href="{{route('admin.brands.show',['brand' => $brand->id])}}">نمایش</a>
                             </th>
                         </tr>
                     @endforeach
