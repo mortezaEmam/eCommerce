@@ -15,7 +15,8 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        //
+        $attributes = Attribute::query()->latest()->paginate(20);
+        return view('admin.attributes.index', compact('attributes'));
     }
 
     /**
@@ -31,7 +32,7 @@ class AttributeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,24 +45,24 @@ class AttributeController extends Controller
             'name' => $request->name,
         ]);
         alert()->success('با تشکر', 'ویژگی شما با موفقیت ایجاد شد');
-        return redirect()->route('admin.brands.index');
+        return redirect()->route('admin.attributes.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Attribute $attribute
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Attribute $attribute)
     {
-        //
+        return view('admin.attributes.show', compact('attribute'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,8 +73,8 @@ class AttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -84,7 +85,7 @@ class AttributeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
