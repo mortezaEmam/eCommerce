@@ -62,33 +62,41 @@ class AttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param Attribute $attribute
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Attribute $attribute)
     {
-        //
+        return view('admin.attributes.edit', compact('attribute'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param Attribute $attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Attribute $attribute)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $attribute->update([
+            'name' => $request->name,
+        ]);
+        alert()->success('با تشکر', 'ویژگی مورد نظر شما با موفقیت ویرایش شد');
+        return redirect()->route('admin.attributes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param Attribute $attribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Attribute $attribute)
     {
         //
     }

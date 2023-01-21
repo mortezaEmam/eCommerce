@@ -43,13 +43,6 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header"> صفحات ورود : </h6>
-                <a class="collapse-item" href="login.html"> ورود </a>
-                <a class="collapse-item" href="register.html"> عضویت </a>
-                <a class="collapse-item" href="forgot-password.html"> فراموشی رمز عبور </a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header"> صفحات دیگر : </h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
                 <a class="collapse-item" href="{{route('admin.attributes.index')}}">ویژگی ها</a>
             </div>
         </div>

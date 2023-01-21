@@ -82,11 +82,11 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        Brand::query()->find($brand->id)->update([
+        $brand->update([
             'name' => $request->name,
             'is_active' => $request->is_active,
         ]);
-        alert()->success('با تشکر', 'برند شما با موفقیت ویرایش شد');
+        alert()->success('با تشکر', 'برند مورد نظر شما با موفقیت ویرایش شد');
         return redirect()->route('admin.brands.index');
     }
 
