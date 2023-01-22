@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory , Sluggable;
+
     protected $table = 'brands';
     protected $guarded = [];
 
