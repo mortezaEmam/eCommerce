@@ -10,15 +10,15 @@
             'title': 'انتخاب ویژگی'
         });
 
-        $('#attributeSelect').on('changed.bs.select', function() {
+        $('#attributeSelect').on('changed.bs.select', function () {
             let attributesSelected = $(this).val();
             let attributes = @json($attributes);
 
             let attributeForFilter = [];
 
             attributes.map((attribute) => {
-                $.each(attributesSelected , function(i,element){
-                    if( attribute.id == element ){
+                $.each(attributesSelected, function (i, element) {
+                    if (attribute.id == element) {
                         attributeForFilter.push(attribute);
                     }
                 });
@@ -26,15 +26,15 @@
 
             $("#attributeIsFilterSelect").find("option").remove();
             $("#variationSelect").find("option").remove();
-            attributeForFilter.forEach((element)=>{
-                let attributeFilterOption = $("<option/>" , {
-                    value : element.id,
-                    text : element.name
+            attributeForFilter.forEach((element) => {
+                let attributeFilterOption = $("<option/>", {
+                    value: element.id,
+                    text: element.name
                 });
 
-                let variationOption = $("<option/>" , {
-                    value : element.id,
-                    text : element.name
+                let variationOption = $("<option/>", {
+                    value: element.id,
+                    text: element.name
                 });
 
                 $("#attributeIsFilterSelect").append(attributeFilterOption);
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="attribute_ids">ویژگی</label>
+                        <label for="attributeSelect">ویژگی</label>
                         <select id="attributeSelect" name="attribute_ids[]" class="form-control" multiple
                                 data-live-search="true">
                             @foreach ($attributes as $attribute)
@@ -113,14 +113,15 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="attribute_is_filter_ids">انتخاب ویژگی های قابل فیلتر</label>
-                        <select id="attributeIsFilterSelect" name="attribute_is_filter_ids[]" class="form-control" multiple
+                        <label for="attributeIsFilterSelect">انتخاب ویژگی های قابل فیلتر</label>
+                        <select id="attributeIsFilterSelect" name="attribute_is_filter_ids[]" class="form-control"
+                                multiple
                                 data-live-search="true">
                         </select>
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="attribute_is_filter_ids">انتخاب ویژگی متغیر</label>
+                        <label for="variationSelect">انتخاب ویژگی متغیر</label>
                         <select id="variationSelect" name="variation_id" class="form-control" data-live-search="true">
                         </select>
                     </div>
