@@ -11,4 +11,17 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = [];
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+    public function childern()
+    {
+        return $this->hasOne(Category::class,'parent_id');
+    }
+    public function getIsActiveAttribute($is_active)
+    {
+        return $is_active ? 'فعال' :'غیرفعال';
+    }
 }
