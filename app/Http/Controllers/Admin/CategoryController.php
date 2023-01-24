@@ -94,12 +94,14 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        $parentCategories = Category::query()->where('parent_id', 0)->get();
+        $attributes = Attribute::all();
+        return view('admin.categories.edit',compact('category','parentCategories','attributes'));
     }
 
     /**

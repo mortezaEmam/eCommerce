@@ -77,7 +77,7 @@
                     <div class="col-md-3">
                         <label>ویژگی متغیر</label>
                         <div class="form-control div-disabled">
-                            @foreach ($category->attributes()->wherePivot('is_variation' , 1)->get() as $attribute)
+                            @foreach ($category->attributes()->wherePivot('is_variation', 1)->get() as $attribute)
                                 {{ $attribute->name }}{{ $loop->last ? '' : '،' }}
                             @endforeach
                         </div>

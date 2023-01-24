@@ -133,13 +133,13 @@
 
                     <div class="form-group col-md-12">
                         <label for="description">توضیحات</label>
-                        <textarea class="form-control" id="description" name="description">{{old('name')}}</textarea>
+                        <textarea class="form-control" id="description" name="description">{{old('description')}}</textarea>
                     </div>
 
                 </div>
 
                 <button class="btn btn-outline-primary mt-5" type="submit">ثبت</button>
-                <a href="{{ route('admin.brands.index') }}" class="btn btn-dark mt-5 mr-3">بازگشت</a>
+                <a href="{{ route('admin.categories.index') }}" class="btn btn-dark mt-5 mr-3">بازگشت</a>
             </form>
         </div>
 
