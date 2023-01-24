@@ -108,12 +108,46 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|unique:categories,slug,'.($category->id),
+            'parent_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_is_filter_ids' => 'required',
+            'variation_id' => 'required',
+        ]);
+        try {
+            DB::beginTransaction();
+            $category->update([
+                'parent_id' => $request->parent_id,
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'description' => $request->description,
+                'icon' => $request->icon,
+                'is_active' =>$request->is_active,
+            ]);
+            $category->attributes()->detach();
+            foreach ($request->attribute_ids as $attribute_id) {
+                $attribute = Attribute::query()->findOrFail($attribute_id);
+                $attribute->categories()->attach($category->id, [
+                    'is_filter' => in_array($attribute_id, $request->attribute_is_filter_ids) ? 1 : 0,
+                    'is_variation' => $request->variation_id == $attribute_id ? 1 : 0,
+                ]);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            alert()->error('مشکل در ویرایش دسته بندی', $e->getMessage());
+            return redirect()->back();
+        }
+        alert()->success('با تشکر', 'دسته بندی مورد نظر شما با موفقیت ویرایش شد');
+        return redirect()->route('admin.categories.index');
+
     }
 
     /**
