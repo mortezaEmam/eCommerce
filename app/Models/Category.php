@@ -12,6 +12,10 @@ class Category extends Model
     protected $table = 'categories';
     protected $guarded = [];
 
+    public function getIsActiveAttribute($is_active)
+    {
+        return $is_active ? 'فعال' :'غیرفعال';
+    }
     public function parent()
     {
         return $this->belongsTo(Category::class,'parent_id');
@@ -20,8 +24,9 @@ class Category extends Model
     {
         return $this->hasOne(Category::class,'parent_id');
     }
-    public function getIsActiveAttribute($is_active)
+
+    public function attributes()
     {
-        return $is_active ? 'فعال' :'غیرفعال';
+        return $this->belongsToMany(Attribute::class,'attribute_category')  ;
     }
 }

@@ -10,7 +10,7 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
-                <h5 class="font-weight-bold">لیست برند ها ({{ $categories->total() }})</h5>
+                <h5 class="font-weight-bold">لیست دسته بندی ها: ({{ $categories->total() }})</h5>
                 <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.categories.create') }}">
                     <i class="fa fa-plus"></i>
                     ایجاد دسته بندی
@@ -45,7 +45,7 @@
                             </th>
                             <th>
                                 @if($category->parent_id == 0)
-                                    {{$category->name}}
+                                    بدون والد
                                 @else
                                     {{$category->parent->name}}
                                 @endif
@@ -55,9 +55,9 @@
                             </th>
                             <th>
                                 <a class="btn btn-outline-success"
-                                   href="{{route('admin.brands.show',['brand' => $category->id])}}">نمایش</a>
+                                   href="{{route('admin.categories.show',['category' => $category->id])}}">نمایش</a>
                                 <a class="btn btn-outline-info"
-                                   href="{{route('admin.brands.edit',['brand' => $category->id])}}">ویرایش</a>
+                                   href="{{route('admin.categories.edit',['category' => $category->id])}}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach

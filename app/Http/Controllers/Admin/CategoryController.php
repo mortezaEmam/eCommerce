@@ -51,7 +51,6 @@ class CategoryController extends Controller
             'attribute_is_filter_ids' => 'required',
             'variation_id' => 'required',
         ]);
-
         try {
             DB::beginTransaction();
             $category = Category::query()->create([
@@ -60,6 +59,7 @@ class CategoryController extends Controller
                 'slug' => $request->slug,
                 'description' => $request->description,
                 'icon' => $request->icon,
+                'is_active' =>$request->is_active,
             ]);
 
             foreach ($request->attribute_ids as $attribute_id) {
@@ -83,12 +83,12 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('admin.categories.show',compact('category'));
     }
 
     /**
