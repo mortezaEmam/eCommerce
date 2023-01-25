@@ -114,40 +114,45 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'slug' => 'required|unique:categories,slug,'.($category->id),
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug,' . $category->id,
             'parent_id' => 'required',
             'attribute_ids' => 'required',
-            'attribute_is_filter_ids' => 'required',
+           'attribute_is_filter_ids' => 'required',
             'variation_id' => 'required',
         ]);
+
         try {
             DB::beginTransaction();
+
             $category->update([
-                'parent_id' => $request->parent_id,
                 'name' => $request->name,
                 'slug' => $request->slug,
-                'description' => $request->description,
+                'parent_id' => $request->parent_id,
                 'icon' => $request->icon,
+                'description' => $request->description,
                 'is_active' =>$request->is_active,
             ]);
+
             $category->attributes()->detach();
-            foreach ($request->attribute_ids as $attribute_id) {
-                $attribute = Attribute::query()->findOrFail($attribute_id);
+
+            foreach ($request->attribute_ids as $attributeId) {
+                $attribute = Attribute::findOrFail($attributeId);
                 $attribute->categories()->attach($category->id, [
-                    'is_filter' => in_array($attribute_id, $request->attribute_is_filter_ids) ? 1 : 0,
-                    'is_variation' => $request->variation_id == $attribute_id ? 1 : 0,
+                    'is_filter' => in_array($attributeId, $request->attribute_is_filter_ids) ? 1 : 0,
+                    'is_variation' => $request->variation_id == $attributeId ? 1 : 0
                 ]);
             }
+
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Exception $ex) {
             DB::rollBack();
-            alert()->error('مشکل در ویرایش دسته بندی', $e->getMessage());
+            alert()->error('مشکل در ویرایش دسته بندی', $ex->getMessage());
             return redirect()->back();
         }
-        alert()->success('با تشکر', 'دسته بندی مورد نظر شما با موفقیت ویرایش شد');
-        return redirect()->route('admin.categories.index');
 
+        alert()->success('دسته بندی مورد نظر ویرایش شد', 'باتشکر');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
