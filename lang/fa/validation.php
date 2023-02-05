@@ -161,6 +161,13 @@ return [
         'attribute_ids' => 'ویژگی ها',
         'variation_id' => 'ویژگی متغیر',
         'attribute_is_filter_ids' => 'ویژگی های قابل فیلتر',
+        'category_id'=>'دسته بندی',
+        'attribute_variation'=>'ویژگی متغیر',
+        'delivery_amount'=>'هزینه ارسال',
+        'brand_id'=>'برند',
+        'tag_ids'=>'تگ ها',
+        'primary_image'=>'تصویر',
+        'images'=>'تصاویر',
     ],
 
 ];

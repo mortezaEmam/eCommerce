@@ -11,4 +11,8 @@ class Tag extends Model
 
     protected $table = 'tags';
     protected $guarded = [];
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->string('slug')->unique();
-            $table->string('primary_image');
-            $table->text('description');
+            $table->string('primary_image')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_active')->default(1);
             $table->integer('status')->default(1);
             $table->unsignedBigInteger('delivery_amount')->default(0);
