@@ -25,28 +25,45 @@
 @import "footer.scss";
 
 @font-face {
-  font-family: "Vazir";
-  src: url("../../fonts/Vazir.eot");
-  /* IE9 Compat Modes */
-  src: url("../../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
+    font-family: "Vazir";
+    src: url("../../fonts/Vazir.eot");
+    /* IE9 Compat Modes */
+    src: url("../../fonts/Vazir.eot?#iefix") format("embedded-opentype"),
     url("../../fonts/Vazir.woff2") format("woff2"),
     url("../../fonts/Vazir.woff") format("woff"),
     url("../../fonts/Vazir.ttf") format("truetype");
-  /* Safari, Android, iOS */
+    /* Safari, Android, iOS */
 }
 
 body {
-  direction: rtl;
-  text-align: right !important;
-  font-family: "Vazir" !important;
+    direction: rtl;
+    text-align: right !important;
+    font-family: "Vazir" !important;
 }
 
-#registerCheckBox::before{
+#registerCheckBox::before {
     right: -1.5rem;
 }
 
-#registerCheckBox::after{
+#registerCheckBox::after {
     right: -1.5rem;
+}
+
+// Bootstrap Paginate RTL
+.page-item:first-child .page-link {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    border-top-right-radius: 0.35rem;
+    border-bottom-right-radius: 0.35rem;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-top-left-radius: 0.35rem;
+    border-bottom-left-radius: 0.35rem;
 }
 
 // Bootstrap Select RTL & Customize
@@ -80,17 +97,18 @@ body {
     text-align: right;
 }
 
-.bootstrap-select.show-tick .dropdown-menu li a span.text{
+.bootstrap-select.show-tick .dropdown-menu li a span.text {
     margin-right: 10px;
 }
 
-.div-disable{
+.div-disable {
     background-color: #eaecf4;
 }
 
 .custom-file-label::after {
     content: "فایل";
 }
+
 .custom-file-label:after {
     right: unset;
     left: 0;

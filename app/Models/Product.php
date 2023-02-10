@@ -21,6 +21,10 @@ class Product extends Model
             ]
         ];
     }
+    public function getIsActiveAttribute($is_active)
+    {
+        return $is_active ? 'فعال' :'غیرفعال';
+    }
 
     public function files()
     {
@@ -30,5 +34,14 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }
