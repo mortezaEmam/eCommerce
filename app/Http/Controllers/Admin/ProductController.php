@@ -117,15 +117,24 @@ class ProductController extends Controller
         return view('admin.products.show-product', $data);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $data = [
+            'product' => $product,
+            'brands' => Brand::all(),
+            'productTagIds' => $product->tags()->pluck('id')->toArray(),
+            'tags' => Tag::all(),
+            'productAttributes' => $product->attributes()->with('attribute')->get(),
+            'productVariations' => $product->variations,
+        ];
+        return view('admin.products.edit-product', $data);
     }
 
     /**
