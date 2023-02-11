@@ -103,12 +103,18 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        $data = [
+            'product' => $product,
+            'productAttributes' => $product->attributes()->with('attribute')->get(),
+            'images' => $product->files,
+            'productVariations' => $product->variations,
+        ];
+        return view('admin.products.show-product', $data);
     }
 
     /**
