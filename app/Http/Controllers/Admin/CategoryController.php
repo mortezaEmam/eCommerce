@@ -46,10 +46,10 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'slug' => 'required|unique:categories,slug|max:255',
-            'parent_id' => 'required',
-            'attribute_ids' => 'required',
+            'parent_id' => 'nullable',
+            'attribute_ids' => 'required|exists:product_attributes,id',
             'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required',
+            'variation_id' => 'required|exists:product_variations,id',
         ]);
         try {
             DB::beginTransaction();
@@ -116,10 +116,10 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,slug,' . $category->id,
-            'parent_id' => 'required',
-            'attribute_ids' => 'required',
+            'parent_id' => 'nullable',
+            'attribute_ids' => 'required|exists:product_attributes,id',
            'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required',
+            'variation_id' => 'required|exists:product_variations,id',
         ]);
 
         try {

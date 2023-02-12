@@ -12,6 +12,21 @@
         $('#tagsSelect').selectpicker({
             'title': 'انتخاب تگ ها'
         });
+        let variations = @json($productVariations);
+        variations.forEach(variation => {
+            $(`#variationDateOnSaleFrom-${variation.id}`).azPersianDateTimePicker({
+                targetTextSelector:$(`#variationInputDateOnSaleFrom-${variation.id}`) ,
+                englishNumber: true,
+                enableTimePicker: true,
+                textFormat: 'yyyy-MM-dd HH:mm:ss',
+            });
+            $(`#variationDateOnSaleTo-${variation.id}`).azPersianDateTimePicker({
+                targetTextSelector:$(`#variationInputDateOnSaleTo-${variation.id}`),
+                englishNumber: true,
+                enableTimePicker: true,
+                textFormat: 'yyyy-MM-dd HH:mm:ss',
+            });
+        });
 
     </script>
 @endsection
@@ -89,10 +104,10 @@
                         <hr>
                         <label>ویژگی ها :</label>
                     </div>
-                    @foreach($productAttributes as $productAttribute)
+                    @foreach($productAttributes as $key => $productAttribute)
                         <div class="form-group col-md-3">
                             <label>{{$productAttribute->attribute->name}}</label>
-                            <input class="form-control" value="{{$productAttribute->value}}" type="text" name="productAttribute[{{$productAttribute->id}}]">
+                            <input class="form-control" value="{{$productAttribute->value}}" type="text" name="Attribute_value[{{$productAttribute->id}}]">
                         </div>
                     @endforeach
                     @foreach ($productVariations as $variation)
@@ -115,19 +130,19 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label> قیمت </label>
-                                            <input type="text" name="productVariation[{{$variation->id}}][price]" class="form-control"
+                                            <input type="text" name="variation_values[{{$variation->id}}][price]" class="form-control"
                                                    value="{{ $variation->price }}">
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <label> تعداد </label>
-                                            <input type="text" name="productVariation[{{$variation->id}}][quantity]" class="form-control"
+                                            <input type="text" name="variation_values[{{$variation->id}}][quantity]" class="form-control"
                                                    value="{{ $variation->quantity }}">
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <label> sku </label>
-                                            <input type="text" name="productVariation[{{$variation->id}}][sku]" class="form-control" value="{{ $variation->sku }}">
+                                            <input type="text" name="variation_values[{{$variation->id}}][sku]" class="form-control" value="{{ $variation->sku }}">
                                         </div>
 
                                         {{-- Sale Section --}}
@@ -145,11 +160,11 @@
                                             <label> تاریخ شروع حراجی </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend order-2">
-                                                    <span class="input-group-text" id="variationDateOnSaleFrom-{{ $variation->id }}">
+                                                    <span class="input-group-text" id="variationDateOnSaleFrom-{{$variation->id}}">
                                                         <i class="fas fa-clock"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" id="variationInputDateOnSaleFrom-{{ $variation->id }}"
+                                                <input type="text" class="form-control" id="variationInputDateOnSaleFrom-{{$variation->id}}"
                                                        name="variation_values[{{ $variation->id }}][date_on_sale_from]"
                                                        value="{{ $variation->date_on_sale_from == null ? null : verta($variation->date_on_sale_from) }}">
                                             </div>

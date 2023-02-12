@@ -23,4 +23,18 @@ class ProductVariation extends Model
             'sku' => $variation['sku'][$key],
         ]);
     }
+    public static function UpdateProductVariation($variationIds)
+    {
+        foreach($variationIds as $key => $value){
+            $productVariation = ProductVariation::findOrFail($key);
+            $productVariation->update([
+                'price' => $value['price'],
+                'quantity' => $value['quantity'],
+                'sku' => $value['sku'],
+                'sale_price' => $value['sale_price'],
+                'date_on_sale_from' => verta()->toCarbon($value['date_on_sale_from']),
+                'date_on_sale_to' => verta()->toCarbon($value['date_on_sale_to']),
+            ]);
+        }
+    }
 }

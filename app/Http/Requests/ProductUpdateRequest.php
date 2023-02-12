@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,16 +30,13 @@ class ProductRequest extends FormRequest
             'description' =>'nullable|string',
             'tag_ids' =>'required',
             'tag_ids.*' =>'int|exists:tags,id',
-            'primary_image' =>'required|mimes:jpg,jpeg,svg,png',
-            'images' =>'required',
-            'images.*' =>'mimes:jpg,jpeg,svg,png',
-            'category_id' =>'required|integer',
-            'attribute_ids' =>'required',
-            'attribute_ids.*' =>'required',
-            'attribute_variation'=>'required',
-            'attribute_variation.*.*'=>'required',
-            'attribute_variation.*.price'=>'integer',
-            'attribute_variation.*.quantity'=>'integer',
+            'Attribute_value'=>'required',
+            'Attribute_value.*'=>'required ',
+            'variation_values.*.price'=>'required|integer',
+            'variation_values.*.quantity'=>'required|integer',
+            'variation_values.*.sale_price'=>'nullable|integer',
+            'variation_values.*.date_on_sale_from'=>'nullable|date',
+            'variation_values.*.date_on_sale_to'=>'nullable|date',
             'delivery_amount' =>'required|integer',
             'delivery_amount_per_product' =>'nullable|integer'
         ];

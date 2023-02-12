@@ -5,6 +5,7 @@ require('chart.js');
 require('bootstrap-select');
 require("bootstrap-select/dist/js/i18n/defaults-fa_IR");//برای اینکه فارسی سازی کنیم
 require('../file/jquery.czMore-latest');
+require("az.bootstrappersiandatetimepicker/dist/az.bootstrappersiandatetimepicker");
 (function($) {
     "use strict"; // Start of use strict
 

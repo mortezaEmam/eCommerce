@@ -22,6 +22,15 @@ class ProductAttribute extends Model
             ]);
         }
     }
+    public static function UpdateProductAttributes($attributesIds)
+    {
+        foreach ($attributesIds as $key => $value) {
+            $productAttribute = ProductAttribute::query()->findOrFail($key);
+            $productAttribute->update([
+                'value' => $value
+            ]);
+        }
+    }
     public function attribute()
     {
         return $this->belongsTo(Attribute::class);

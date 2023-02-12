@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Facades\Verta;
+
 
 function generateFileName($name)
 {
@@ -13,6 +15,3 @@ function generateFileName($name)
     $microsecond = Carbon::now()->microsecond;
     return $year . '_' . $month . '_' . $day . '_' . $hour . '_' . $minute . '_' . $second . '_' . $microsecond . '_' . $name;
 }
-
-
-

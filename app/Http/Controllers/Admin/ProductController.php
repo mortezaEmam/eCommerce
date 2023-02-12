@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\uploader_image;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     use uploader_image;
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::query()->latest()->paginate(20);
-        return view('admin.products.index-product',compact('products'));
+        return view('admin.products.index-product', compact('products'));
     }
 
     /**
@@ -55,7 +57,7 @@ class ProductController extends Controller
 
             //upload primary_image for product
             if (filled($request->primary_image)) {
-                $primary_image = $this->upload($request->primary_image, $this->address_upload_image(true),null);
+                $primary_image = $this->upload($request->primary_image, $this->address_upload_image(true), null);
 
             }
             //store data into product table
@@ -72,7 +74,7 @@ class ProductController extends Controller
 
             //upload && store images for product into file table
             foreach ($request->images as $image) {
-                $this->upload($image, $this->address_upload_image(false,true), $product);
+                $this->upload($image, $this->address_upload_image(false, true), $product);
             }
 
             //insert data into product_attributes table
@@ -144,9 +146,41 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            //store data into product table
+            $product->update([
+                'name' => $request->name,
+                'brand_id' => $request->brand_id,
+                'description' => $request->description,
+                'delivery_amount' => $request->delivery_amount,
+                'delivery_amount_per_product' => $request->delivery_amount_per_product,
+                'is_active' => $request->is_active,
+            ]);
+
+            //update data into product_attributes table
+            ProductAttribute::UpdateProductAttributes($request->Attribute_value);
+
+            // update data into product_variation table
+
+            ProductVariation::UpdateProductVariation($request->variation_values);
+
+
+            //store tages for product
+
+            $product->tags()->sync($request->tag_ids);
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            alert()->error('مشکل در ویرایش محصول', $ex->getMessage());
+            return redirect()->back();
+        }
+
+        alert()->success('محصول مورد نظر ویرایش شد', 'باتشکر');
+        return redirect()->route('admin.products.index');
     }
 
     /**

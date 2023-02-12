@@ -8,7 +8,8 @@
 
 // Import Bootstrap-select
 @import "~bootstrap-select/dist/css/bootstrap-select.min.css";
-
+//Import Css DateTimePiker for Bootstrap 4+
+@import "~az.bootstrappersiandatetimepicker/dist/az.bootstrappersiandatetimepicker.css";
 // Import Custom SB Admin 2 Mixins and Components
 @import "mixins.scss";
 @import "global.scss";

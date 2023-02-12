@@ -19,6 +19,7 @@
         "sass-loader": "^12.1.0"
     },
     "dependencies": {
+        "az.bootstrappersiandatetimepicker": "^1.1.2",
         "bootstrap": "^4.5.0",
         "bootstrap-select": "^1.13.18",
         "chart.js": "^2.9.3",
