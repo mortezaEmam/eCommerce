@@ -152,7 +152,7 @@
                     <label>تصویر اصلی</label>
                     <div class="card">
                         <img class="card-img-top"
-                             src="{{Storage::url($product->primary_image)}}"
+                             src="{{Storage::url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH').$product->primary_image)}}"
                              alt="{{$product->name }}">
                     </div>
                 </div>

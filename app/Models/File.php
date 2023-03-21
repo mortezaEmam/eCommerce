@@ -14,4 +14,26 @@ class File extends Model
     {
         return $this->morphTo();
     }
+    public static function upload($primaryImage, $images ,$object)
+    {
+        $fileNamePrimaryImage = generateFileName($primaryImage->getClientOriginalName());
+        $mime_type =  $primaryImage->getClientMimeType();
+        $primaryImage->storeAs(env('PRODUCT_IMAGES_UPLOAD_PATH'), $fileNamePrimaryImage);
+
+        $file = new File();
+        $file->name = $fileNamePrimaryImage;
+        $file->path = env('PRODUCT_IMAGES_UPLOAD_PATH');
+        $file->mime_type = $mime_type;
+        $object->files()->save($file);
+        $fileNameImages = [];
+        foreach ($images as $image) {
+            $fileNameImage = generateFileName($image->getClientOriginalName());
+
+            $image->move(public_path(env('PRODUCT_IMAGES_UPLOAD_PATH')), $fileNameImage);
+
+            array_push($fileNameImages, $fileNameImage);
+        }
+
+        return ['fileNamePrimaryImage' => $fileNamePrimaryImage, 'fileNameImages' => $fileNameImages];
+    }
 }

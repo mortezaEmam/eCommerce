@@ -8,17 +8,17 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\File;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductVariation;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\fileExists;
 
 class ProductController extends Controller
 {
-    use uploader_image;
-
     /**
      * Display a listing of the resource.
      *
@@ -54,29 +54,28 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
+            //store  primary image
+            $productImageController = new ProductImageController();
+            $primary_image = $productImageController->upload_Primary_image_product($request->primary_image, env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH'));
 
-            //upload primary_image for product
-            if (filled($request->primary_image)) {
-                $primary_image = $this->upload($request->primary_image, $this->address_upload_image(true), null);
-
-            }
             //store data into product table
             $product = Product::query()->create([
                 'name' => $request->name,
                 'brand_id' => $request->brand_id,
                 'category_id' => $request->category_id,
-                'primary_image' => filled($primary_image) ? $primary_image : null,
+                'primary_image' => $primary_image,
                 'description' => $request->description,
                 'delivery_amount' => $request->delivery_amount,
                 'delivery_amount_per_product' => $request->delivery_amount_per_product,
                 'is_active' => $request->is_active,
             ]);
+            //store images of product in the file tabel
 
-            //upload && store images for product into file table
-            foreach ($request->images as $image) {
-                $this->upload($image, $this->address_upload_image(false, true), $product);
+            if (filled($request->images)) {
+                foreach ($request->images as $image) {
+                    uploadFile($product, $image, env('PRODUCT_IMAGES_UPLOAD_PATH'));
+                }
             }
-
             //insert data into product_attributes table
             ProductAttribute::StoreProductAttributes($request->attribute_ids, $product);
 
@@ -91,6 +90,10 @@ class ProductController extends Controller
             //store tages for product
 
             $product->tags()->attach($request->tag_ids);
+
+            //store data in the file table
+
+
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();

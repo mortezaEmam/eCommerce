@@ -13,20 +13,6 @@
             'title': 'انتخاب تگ ها'
         });
 
-        // Show File Name
-        $('#primary_image').change(function () {
-            //get the file name
-            var fileName = $(this).val();
-            //replace the "Choose a file" label
-            $(this).next('.custom-file-label').html(fileName);
-        });
-        $('#images').change(function () {
-            //get the file name
-            var fileName = $(this).val();
-            //replace the "Choose a file" label
-            $(this).next('.custom-file-label').html(fileName);
-        });
-
         $('#categorySelect').selectpicker({
             'title': 'انتخاب دسته بندی'
         });
@@ -138,19 +124,17 @@
                     <div class="form-group col-md-3">
                         <label for="primary_image"> انتخاب تصویر اصلی </label>
                         <div class="custom-file">
-                            <input type="file" name="primary_image" class="custom-file-input" id="primary_image">
-                            <label class="custom-file-label" for="primary_image"> انتخاب فایل </label>
+                            <input type="file" name="primary_image" id="primary_image" accept="image/*">
                         </div>
                     </div>
-
                     <div class="form-group col-md-3">
                         <label for="images"> انتخاب تصاویر </label>
-                        <div class="custom-file">
-                            <input class="custom-file-input" id="images" type="file" name="images[]" multiple>
-                            <label class="custom-file-label" for="images"> انتخاب فایل ها </label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="images[]" id="exampleInputFile" accept="image/*" multiple>
+                            </div>
                         </div>
                     </div>
-                    {{-- Category&Attributes Section --}}
                     <div class="col-md-12">
                         <hr>
                         <p>دسته بندی و ویژگی ها : </p>

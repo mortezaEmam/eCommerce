@@ -12,7 +12,7 @@ class ProductVariation extends Model
     protected $table = 'product_variations';
     protected $guarded = [];
 
-    public static function StoreProductVariation($variation, $attributeId, $product ,$key)
+    public static function StoreProductVariation($variation, $attributeId, $product, $key)
     {
         ProductVariation::query()->create([
             'product_id' => $product->id,
@@ -23,17 +23,18 @@ class ProductVariation extends Model
             'sku' => $variation['sku'][$key],
         ]);
     }
+
     public static function UpdateProductVariation($variationIds)
     {
-        foreach($variationIds as $key => $value){
+        foreach ($variationIds as $key => $value) {
             $productVariation = ProductVariation::findOrFail($key);
             $productVariation->update([
                 'price' => $value['price'],
                 'quantity' => $value['quantity'],
                 'sku' => $value['sku'],
                 'sale_price' => $value['sale_price'],
-                'date_on_sale_from' => verta()->toCarbon($value['date_on_sale_from']),
-                'date_on_sale_to' => verta()->toCarbon($value['date_on_sale_to']),
+                'date_on_sale_from' => $value['date_on_sale_from'] == null ? null : convertShamsiToGregorianDate($value['date_on_sale_from']),
+                'date_on_sale_to' => $value['date_on_sale_from'] == null ? null : convertShamsiToGregorianDate($value['date_on_sale_to']),
             ]);
         }
     }
