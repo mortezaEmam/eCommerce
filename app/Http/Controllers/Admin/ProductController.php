@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\uploader_image;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductCategoryRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Brand;
@@ -89,9 +90,6 @@ class ProductController extends Controller
             //store tages for product
 
             $product->tags()->attach($request->tag_ids);
-
-            //store data in the file table
-
 
             DB::commit();
         } catch (\Exception $ex) {
@@ -194,5 +192,39 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function editProductCategory(Request $request, Product $product)
+    {
+        $categories = Category::query()->where('parent_id', '!=', 0)->get();
+        return view('admin.products.edit-category-product', compact('product', 'categories'));
+    }
+
+    public function updateProductCategory(ProductCategoryRequest $request,Product $product)
+    {
+        try {
+            DB::beginTransaction();
+
+            //store data into product table
+            $product->update([
+                'category_id' => $request->category_id,
+            ]);
+            //update data into product_attributes table
+            ProductAttribute::ChangeProductAttributes($request->attribute_ids, $product);
+
+            //update data into product_variations table
+
+                ProductVariation::ChangeProductVariation($request, $product);
+
+
+            DB::commit();
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            alert()->error('مشکل در ایجاد محصول', $ex->getMessage());
+            return redirect()->back();
+        }
+
+        alert()->success('محصول مورد نظر ایجاد شد', 'باتشکر');
+        return redirect()->route('admin.products.index');
     }
 }

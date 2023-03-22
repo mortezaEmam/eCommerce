@@ -38,5 +38,8 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::delete('/products/{product}/images-destroy' ,[ProductImageController::class , 'destroy'])->name('products.images.destroy');
     Route::put('/products/{product}/images-set-primary' ,[ProductImageController::class , 'setPrimary'])->name('products.images.set_primary');
     Route::post('/products/{product}/images-add' ,[ProductImageController::class , 'add'])->name('products.images.add');
+    //Edit product category
+    Route::get('/products/{product}/edit-category-product' ,[ProductController::class , 'editProductCategory'])->name('products.category.edit');
+    Route::put('/products/{product}/update-category-product' ,[ProductController::class , 'updateProductCategory'])->name('products.updateProductCategory');
 
 });
