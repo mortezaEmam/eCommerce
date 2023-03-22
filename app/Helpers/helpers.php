@@ -50,3 +50,10 @@ function uploadFile($object, $image, $path){
     $file->mime_type = $mime_type;
     $object->files()->save($file);
 }
+function upload_Primary_image_product($primaryImage, $path)
+{
+    $file_name = generateFileName($primaryImage->getClientOriginalName());
+    $primaryImage->storeAs($path, $file_name);
+
+    return $path . $file_name;
+}

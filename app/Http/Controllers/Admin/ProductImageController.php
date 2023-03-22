@@ -3,34 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteImageRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller
 {
-    public function upload_Primary_image_product($primaryImage,$path)
-    {
-        $file_name = generateFileName($primaryImage->getClientOriginalName());
-        $primaryImage->storeAs($path, $file_name);
-
-        return $file_name;
-    }
-
 
     public function edit(Product $product)
     {
-        return view('admin.products.edit_images', compact('product'));
+        return view('admin.products.edit-image-product', compact('product'));
     }
 
-    public function destroy(Request $request)
+    public function destroy(DeleteImageRequest $request, Product $product)
     {
-        $request->validate([
-            'image_id' => 'required|exists:product_images,id'
-        ]);
-
-        ProductImage::destroy($request->image_id);
-
+        $product->files()->where('id', $request->image_id)->delete();
         alert()->success('تصویر محصول مورد نظر حدف شد', 'باتشکر');
         return redirect()->back();
     }
@@ -38,15 +27,16 @@ class ProductImageController extends Controller
     public function setPrimary(Request $request, Product $product)
     {
         $request->validate([
-            'image_id' => 'required|exists:product_images,id'
+            'image_id' => 'required|exists:files,id'
         ]);
 
-        $productImage = ProductImage::findOrFail($request->image_id);
+        $productImage = $product->files()->where('id', $request->image_id)->first();
         $product->update([
-            'primary_image' => $productImage->image
+            'primary_image' => $productImage->path . '/' . $productImage->name,
         ]);
         alert()->success('ویرایش تصویر اصلی محصول با موفقیت انجام شد', 'باتشکر');
         return redirect()->back();
+
     }
 
     public function add(Request $request, Product $product)
@@ -57,35 +47,26 @@ class ProductImageController extends Controller
         ]);
 
         if ($request->primary_image == null && $request->images == null) {
-            return redirect()->back()->withErrors(['msg' => 'تصویر یا تصاویر محصول الزامی هست']);
+            return redirect()->back()->withErrors(['massage' => 'تصویر یا تصاویر محصول الزامی هست']);
         }
 
         try {
             DB::beginTransaction();
-
+            //update  primary image
             if ($request->has('primary_image')) {
 
-                $fileNamePrimaryImage = generateFileName($request->primary_image->getClientOriginalName());
-                $request->primary_image->move(public_path(env('PRODUCT_IMAGES_UPLOAD_PATH')), $fileNamePrimaryImage);
+                $primary_image = upload_Primary_image_product($request->primary_image, env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH'));
 
                 $product->update([
-                    'primary_image' => $fileNamePrimaryImage
+                    'primary_image' => $primary_image
                 ]);
             }
-
-            if ($request->has('images')) {
-
-                foreach ($request->images as $image) {
-                    $fileNameImage = generateFileName($image->getClientOriginalName());
-
-                    $image->move(public_path(env('PRODUCT_IMAGES_UPLOAD_PATH')), $fileNameImage);
-
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'image' => $fileNameImage
-                    ]);
+                // add images of product in the file tabel
+                if (filled($request->images)) {
+                    foreach ($request->images as $image) {
+                        uploadFile($product, $image, env('PRODUCT_IMAGES_UPLOAD_PATH'));
+                    }
                 }
-            }
 
             DB::commit();
         } catch (\Exception $ex) {

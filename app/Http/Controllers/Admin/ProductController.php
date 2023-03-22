@@ -55,8 +55,7 @@ class ProductController extends Controller
         try {
             DB::beginTransaction();
             //store  primary image
-            $productImageController = new ProductImageController();
-            $primary_image = $productImageController->upload_Primary_image_product($request->primary_image, env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH'));
+            $primary_image = upload_Primary_image_product($request->primary_image, env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH'));
 
             //store data into product table
             $product = Product::query()->create([

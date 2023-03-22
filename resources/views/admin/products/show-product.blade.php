@@ -152,8 +152,10 @@
                     <label>تصویر اصلی</label>
                     <div class="card">
                         <img class="card-img-top"
-                             src="{{Storage::url(env('PRODUCT_PRIMARY_IMAGES_UPLOAD_PATH').$product->primary_image)}}"
-                             alt="{{$product->name }}">
+                             src="{{Storage::url($product->primary_image)}}"
+                             alt="{{$product->name }}"
+                             style="width:100%; height: 300px"
+                        >
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -165,7 +167,9 @@
                         <div class="card">
                             <img class="card-img-top"
                                  src="{{ Storage::url($image->path.'/'.$image->name)}}"
-                                 alt="{{ $product->name }}" style="height: 300px;width: auto">
+                                 alt="{{ $product->name }}"
+                                 style="width:100%; height: 300px"
+                            >
                         </div>
                     </div>
                 @endforeach
