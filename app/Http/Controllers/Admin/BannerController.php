@@ -15,7 +15,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $banners = Banner::query()->latest()->paginate(10);
+        return view('admin.banners.index-banner', compact('banners'));
     }
 
     /**
@@ -65,7 +66,6 @@ class BannerController extends Controller
      */
     public function show(Banner $banner)
     {
-        //
     }
 
     /**
@@ -76,7 +76,8 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        //
+        return view('admin.banners.edit-banner', compact('banner'));
+
     }
 
     /**
@@ -88,7 +89,28 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
-        //
+        $request->validate([
+            'image' => 'nullable|mimes:jpg,jpeg,svg,png',
+            'type' => 'required',
+            'priority' => 'integer',
+        ]);
+        if (filled($request->image)) {
+            $image = upload_Primary_image_product($request->image, env('PRODUCT_BANNER_IMAGES_UPLOAD_PATH'));
+        }
+
+        $banner->update([
+            'image' => $request->has('image') ? $image : $banner->image,
+            'title' => $request->title,
+            'text' => $request->text,
+            'priority' => $request->priority,
+            'is_active' => $request->is_active,
+            'type' => $request->type,
+            'button_text' => $request->button_text,
+            'button_link' => $request->button_link,
+            'button_icon' => $request->button_icon,
+        ]);
+        alert()->success('بنر مورد نظر ویرایش شد', 'باتشکر');
+        return redirect()->route('admin.banners.index');
     }
 
     /**
@@ -99,6 +121,8 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        //
+        $banner->delete();
+        alert()->success('بنر مورد نظر حذف شد', 'باتشکر');
+        return redirect()->route('admin.banners.index');
     }
 }
