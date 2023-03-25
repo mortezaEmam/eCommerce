@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,3 +46,4 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::put('/products/{product}/update-category-product' ,[ProductController::class , 'updateProductCategory'])->name('products.updateProductCategory');
 
 });
+Route::get('/',[HomeController::class,'index']);

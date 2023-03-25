@@ -22,11 +22,15 @@ class Category extends Model
     }
     public function childern()
     {
-        return $this->hasOne(Category::class,'parent_id');
+        return $this->hasMany(Category::class,'parent_id');
     }
 
     public function attributes()
     {
         return $this->belongsToMany(Attribute::class,'attribute_category')  ;
+    }
+    public static function getParentCategory()
+    {
+        return static::query()->where('parent_id',0)->get();
     }
 }
