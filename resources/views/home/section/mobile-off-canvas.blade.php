@@ -25,7 +25,7 @@
                         <li class="menu-item-has-children">
                             <a href="shop.html">فروشگاه</a>
                             <ul class="dropdown">
-                                @foreach($parentCategorys as $parentCategory)
+                                @foreach($parentCategories as $parentCategory)
                                 <li class="menu-item-has-children">
                                     <a href="#">{{$parentCategory->name}}</a>
                                     <ul class="dropdown">

@@ -24,16 +24,16 @@
                                     <a href="shop.html"> فروشگاه </a>
 
                                     <ul class="mega-menu">
-                                        @foreach($parentCategorys as $parentCategory)
-                                        <li>
+                                        @foreach($parentCategories as $parentCategory)
+                                            <li>
                                                 <a class="menu-title" href="#">{{$parentCategory->name}}</a>
-                                            <ul>
-                                                @foreach($parentCategory->childern as $childern)
-                                                    <li><a href="#">{{$childern->name}}</a></li>
-                                                @endforeach
+                                                <ul>
+                                                    @foreach($parentCategory->childern as $childern)
+                                                        <li><a href="#">{{$childern->name}}</a></li>
+                                                    @endforeach
 
-                                            </ul>
-                                        </li>
+                                                </ul>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </li>
@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg" /></a>
+                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg"/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
@@ -89,7 +89,7 @@
                                             <span>1 x 9,000</span>
                                         </div>
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg" /></a>
+                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg"/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
@@ -146,7 +146,7 @@
             <div class="sidebar-search-input">
                 <form>
                     <div class="form-search">
-                        <input id="search" class="input-text" value="" placeholder=" ...جستجو " type="search" />
+                        <input id="search" class="input-text" value="" placeholder=" ...جستجو " type="search"/>
                         <button>
                             <i class="sli sli-magnifier"></i>
                         </button>
@@ -193,7 +193,7 @@
                                         </div>
 
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg" /></a>
+                                            <a href="#"><img alt="" src="assets/img/cart/cart-1.svg"/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
@@ -205,7 +205,7 @@
                                             <span>1 x 9,000</span>
                                         </div>
                                         <div class="shopping-cart-img">
-                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg" /></a>
+                                            <a href="#"><img alt="" src="assets/img/cart/cart-2.svg"/></a>
                                             <div class="item-close">
                                                 <a href="#"><i class="sli sli-close"></i></a>
                                             </div>
