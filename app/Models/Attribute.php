@@ -16,4 +16,8 @@ class Attribute extends Model
     {
         return $this->belongsToMany(Category::class,'attribute_category');
     }
+    public static function getAttributeId(Product $product)
+    {
+        return static::find($product->variations->first()->attribute_id);
+    }
 }

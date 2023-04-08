@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\View;

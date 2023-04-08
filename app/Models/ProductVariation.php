@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Requests\ProductCategoryRequest;
+use Carbon\Carbon;
 use http\Env\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ class ProductVariation extends Model
 
     protected $table = 'product_variations';
     protected $guarded = [];
+    protected $appends =['is_sale'];
 
     public static function StoreProductVariation($variation, $attributeId, $product, $key)
     {
@@ -58,5 +60,10 @@ class ProductVariation extends Model
                 'sku' => $request->attribute_variation['sku'][$i],
             ]);
         }
+    }
+
+    public function getIsSaleAttribute()
+    {
+        return (($this->sale_price!=null&$this->date_on_sale_from < Carbon::now()&$this->date_on_sale_to > Carbon::now())?true:false);
     }
 }
