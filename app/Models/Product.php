@@ -71,4 +71,9 @@ class Product extends Model
     {
         return static::query()->where('is_active',1)->get();
     }
+
+    public function rates()
+    {
+        return $this->hasMany(ProductRates::class);
+    }
 }

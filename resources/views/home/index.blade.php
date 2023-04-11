@@ -197,20 +197,11 @@
                                                 @endif
                                             </div>
                                             <div class="ht-product-ratting-wrap">
-                        <span class="ht-product-ratting">
-                          <span class="ht-product-user-ratting" style="width: 100%;">
-                            <i class="sli sli-star"></i>
-                            <i class="sli sli-star"></i>
-                            <i class="sli sli-star"></i>
-                            <i class="sli sli-star"></i>
-                            <i class="sli sli-star"></i>
-                          </span>
-                          <i class="sli sli-star"></i>
-                          <i class="sli sli-star"></i>
-                          <i class="sli sli-star"></i>
-                          <i class="sli sli-star"></i>
-                          <i class="sli sli-star"></i>
-                        </span>
+                                                <div id="dataReadonlyReview"
+                                                     data-rating-stars="5"
+                                                     data-rating-readonly="true"
+                                                     data-rating-value="{{ceil($product->rates->avg('rate'))}}">
+                                                </div>
                                             </div>
                                         </div>
 
@@ -734,14 +725,13 @@
                                         @endif
                                     </div>
                                     <div class="pro-details-rating-wrap">
-                                        <div class="pro-details-rating">
-                                            <i class="sli sli-star yellow"></i>
-                                            <i class="sli sli-star yellow"></i>
-                                            <i class="sli sli-star yellow"></i>
-                                            <i class="sli sli-star"></i>
-                                            <i class="sli sli-star"></i>
+                                        <div id="dataReadonlyReview"
+                                             data-rating-stars="5"
+                                             data-rating-readonly="true"
+                                             data-rating-value="{{ceil($product->rates->avg('rate'))}}">
                                         </div>
-                                        <span>3 دیدگاه</span>
+                                        <span class="mx-5">|</span>
+                                        <span >3 دیدگاه</span>
                                     </div>
                                     <p class="text-right">
                                         {{$product->description}}
@@ -767,6 +757,7 @@
                                             <div class="pro-details-size w-50">
                                                 <span>{{\App\Models\Attribute::getAttributeId($product)->name}}</span>
                                                 <select class="form-control variation-select">
+                                                    <option>-----انتخاب کنید------</option>
                                                     @foreach($product->variations()->where('quantity','>',0)->get() as $variation)
                                                         <option
                                                             value="{{json_encode($variation->only(['id','is_sale','sale_price','price','quantity'])) }}"
