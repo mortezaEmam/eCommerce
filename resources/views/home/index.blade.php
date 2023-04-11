@@ -217,13 +217,13 @@
         </div>
     </div>
 
-    <div class="testimonial-area pt-80 pb-95 section-margin-1">
+    <div class="testimonial-area pt-80 pb-95 section-margin-1" style="background-image: url({{asset('images/home/bg-1.jpg')}});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 ml-auto mr-auto">
-                    <div class="testimonial-active owl-carousel nav-style-1">
-                        <div class="single-testimonial text-center">
-                            <img src="assets/img/testimonial/testi-1.png" alt=""/>
+                    <div class="testimonial-active owl-carousel nav-style-1" >
+                        <div class="single-testimonial text-center" >
+                            <img src="{{asset('images/home/testi-1.png')}}" alt=""/>
                             <p>
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
                                 است. چاپگرها و
@@ -234,12 +234,12 @@
                                 آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
                             </p>
                             <div class="client-info">
-                                <img src="assets/img/icon-img/testi.png" alt=""/>
+                                <img src="{{asset('images/home/testi.png')}}" alt=""/>
                                 <h5>لورم ایپسوم</h5>
                             </div>
                         </div>
                         <div class="single-testimonial text-center">
-                            <img src="assets/img/testimonial/testi-2.png" alt=""/>
+                            <img src="{{asset('images/home/testi-2.png')}}" alt=""/>
                             <p>
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
                                 است. چاپگرها و
@@ -250,7 +250,7 @@
                                 آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت
                             </p>
                             <div class="client-info">
-                                <img src="assets/img/icon-img/testi.png" alt=""/>
+                                <img src="{{asset('images/home/testi.png')}}" alt=""/>
                                 <h5>لورم ایپسوم</h5>
                             </div>
                         </div>
@@ -653,7 +653,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/free-shipping.png" alt=""/>
+                            <img src="{{asset('images/home/free-shipping.png')}}" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
@@ -664,7 +664,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40 pl-50">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/support.png" alt=""/>
+                            <img src="{{asset('images/home/support.png')}}" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
@@ -675,7 +675,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-4">
                     <div class="single-feature text-right mb-40">
                         <div class="feature-icon">
-                            <img src="assets/img/icon-img/security.png" alt=""/>
+                            <img src="{{asset('images/home/security.png')}}" alt=""/>
                         </div>
                         <div class="feature-content">
                             <h4>لورم ایپسوم</h4>
