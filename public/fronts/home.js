@@ -1,40 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/home/files/modal-product.js":
-/*!**************************************************!*\
-  !*** ./resources/js/home/files/modal-product.js ***!
-  \**************************************************/
-/***/ (() => {
-
-$('.variation-select').on('change', function () {
-  var variation = JSON.parse(this.value);
-  var variationPriceDiv = $('.variation-price');
-  variationPriceDiv.empty();
-  if (variation.is_sale) {
-    var spanSale = $('<span />', {
-      "class": 'new',
-      text: toPersianNum(number_format(variation.sale_price)) + ' تومان'
-    });
-    var spanPrice = $('<span />', {
-      "class": 'old',
-      text: toPersianNum(number_format(variation.price)) + ' تومان'
-    });
-    variationPriceDiv.append(spanSale);
-    variationPriceDiv.append(spanPrice);
-  } else {
-    var _spanPrice = $('<span />', {
-      "class": 'new',
-      text: toPersianNum(number_format(variation.price)) + ' تومان'
-    });
-    variationPriceDiv.append(_spanPrice);
-  }
-  $('.quantity-input').attr('data-max', variation.quantity);
-  $('.quantity-input').val(1);
-});
-
-/***/ }),
-
 /***/ "./resources/js/home/files/rating.js":
 /*!*******************************************!*\
   !*** ./resources/js/home/files/rating.js ***!
@@ -18206,8 +18172,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/home/home.js ***!
   \***********************************/
 __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-__webpack_require__(/*! ./files/rating.js */ "./resources/js/home/files/rating.js");
-__webpack_require__(/*! ./files/modal-product */ "./resources/js/home/files/modal-product.js");
+__webpack_require__(/*! ./files/rating */ "./resources/js/home/files/rating.js");
 (function ($) {
   "use strict";
 

@@ -33,4 +33,9 @@ class Category extends Model
     {
         return static::query()->where('parent_id',0)->get();
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

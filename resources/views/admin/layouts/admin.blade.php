@@ -63,8 +63,8 @@
 @include('admin.sections.scroll_to_top')
 
 
-<!-- Custom js for this template-->
-<script src="{{asset('/js/admin.js')}}"></script>
+<!-- Custom fronts for this template-->
+<script src="{{asset('/fronts/admin.fronts')}}"></script>
 @include('sweetalert::alert')
 
 @yield('scripts')

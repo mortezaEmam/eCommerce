@@ -21,15 +21,15 @@
                                 <li><a href="contact-us.html"> تماس با ما </a></li>
 
                                 <li class="angle-shape">
-                                    <a href="shop.html"> فروشگاه </a>
+                                    <a href="#"> فروشگاه </a>
 
                                     <ul class="mega-menu">
                                         @foreach($parentCategories as $parentCategory)
                                             <li>
-                                                <a class="menu-title" href="#">{{$parentCategory->name}}</a>
+                                                <a class="menu-title" href="{{route('home.categories.show' ,['category' => $parentCategory->slug])}}">{{$parentCategory->name}}</a>
                                                 <ul>
                                                     @foreach($parentCategory->childern as $childern)
-                                                        <li><a href="#">{{$childern->name}}</a></li>
+                                                        <li><a href="{{route('home.categories.show' ,['category' => $childern->slug])}}">{{$childern->name}}</a></li>
                                                     @endforeach
 
                                                 </ul>
@@ -39,7 +39,7 @@
                                 </li>
 
                                 <li class="angle-shape">
-                                    <a href="index.html"> صفحه اصلی </a>
+                                    <a href="{{route('home.index')}}l"> صفحه اصلی </a>
                                 </li>
                             </ul>
                         </nav>
@@ -161,7 +161,7 @@
             <div class="row align-items-center">
                 <div class="col-6">
                     <div class="mobile-logo">
-                        <a href="index.html">
+                        <a href="{{route('home.index')}}">
                             <h4 class="font-weight-bold">WebProg.ir</h4>
                         </a>
                     </div>

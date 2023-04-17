@@ -1,5 +1,7 @@
 require("bootstrap/dist/js/bootstrap.bundle");
-require('./files/rating');
+require("./files/rating.js");
+require("./files/modal-product");
+
 (function ($) {
     "use strict";
 

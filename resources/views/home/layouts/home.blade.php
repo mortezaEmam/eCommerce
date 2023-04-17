@@ -26,11 +26,11 @@
 
 </div>
 
-<!-- All JS is here
-============================================ -->
-<script src="{{asset('/js/home/jquery-1.12.4.min.js')}}"></script>
-<script src="{{asset('/js/home/plugins.js')}}"></script>
-<script src="{{asset('/js/home.js')}}"></script>
+<!-- JavaScript-->
+<script src="{{ asset('/js/home/jquery-1.12.4.min.js') }}"></script>
+<script src="{{ asset('/js/home/plugins.js') }}"></script>
+<script src="{{ asset('/js/home.js') }}"></script>
+
 @yield('scripts')
 </body>
 

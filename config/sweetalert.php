@@ -6,7 +6,7 @@ return [
     |--------------------------------------------------------------------------
     | CDN LINK
     |--------------------------------------------------------------------------
-    | By default SweetAlert2 use its local sweetalert.all.js
+    | By default SweetAlert2 use its local sweetalert.all.fronts
     | file.
     | However, you can use its cdn if you want.
     |
@@ -16,11 +16,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Always load the sweetalert.all.js
+    | Always load the sweetalert.all.fronts
     |--------------------------------------------------------------------------
     | There might be situations where you will always want the sweet alert
-    | js package to be there for you. (for eg. you might use it heavily to
-    | show notifications or you might want to use the native js) then this
+    | fronts package to be there for you. (for eg. you might use it heavily to
+    | show notifications or you might want to use the native fronts) then this
     | might be handy.
     |
     */
@@ -29,17 +29,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Never load the sweetalert.all.js
+    | Never load the sweetalert.all.fronts
     |--------------------------------------------------------------------------
-    | If you want to handle the sweet alert js package by yourself
+    | If you want to handle the sweet alert fronts package by yourself
     | (for eg. you might want to use laravel mix) then this can be
     | handy.
-    | If you set always load js to true & never load js to false,
-    | it's going to prioritize the never load js.
+    | If you set always load fronts to true & never load fronts to false,
+    | it's going to prioritize the never load fronts.
     |
-    | alwaysLoadJs = true  & neverLoadJs = true  => js will not be loaded
-    | alwaysLoadJs = true  & neverLoadJs = false => js will be loaded
-    | alwaysLoadJs = false & neverLoadJs = false => js will be loaded when
+    | alwaysLoadJs = true  & neverLoadJs = true  => fronts will not be loaded
+    | alwaysLoadJs = true  & neverLoadJs = false => fronts will be loaded
+    | alwaysLoadJs = false & neverLoadJs = false => fronts will be loaded when
     | you set alert/toast by using the facade/helper functions.
     */
 

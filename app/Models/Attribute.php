@@ -20,4 +20,13 @@ class Attribute extends Model
     {
         return static::find($product->variations->first()->attribute_id);
     }
+
+    public function values()
+    {
+        return $this->hasMany(ProductAttribute::class)->select('attribute_id','value')->distinct();
+    }
+    public function VariationValues()
+    {
+        return $this->hasMany(ProductVariation::class)->select('attribute_id','value')->distinct();
+    }
 }

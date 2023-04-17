@@ -44,12 +44,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'slug' => 'required|unique:categories,slug|max:255',
-            'parent_id' => 'nullable',
-            'attribute_ids' => 'required|exists:product_attributes,id',
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug',
+            'parent_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_ids.*' => 'exists:attributes,id',
             'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required|exists:product_variations,id',
+            'attribute_is_filter_ids.*' => 'exists:attributes,id',
+            'variation_id' => 'required|exists:attributes,id',
         ]);
         try {
             DB::beginTransaction();
@@ -116,10 +118,12 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'slug' => 'required|unique:categories,slug,' . $category->id,
-            'parent_id' => 'nullable',
-            'attribute_ids' => 'required|exists:product_attributes,id',
-           'attribute_is_filter_ids' => 'required',
-            'variation_id' => 'required|exists:product_variations,id',
+            'parent_id' => 'required',
+            'attribute_ids' => 'required',
+            'attribute_ids.*' => 'exists:attributes,id',
+            'attribute_is_filter_ids' => 'required',
+            'attribute_is_filter_ids.*' => 'exists:attributes,id',
+            'variation_id' => 'required|exists:attributes,id',
         ]);
 
         try {
