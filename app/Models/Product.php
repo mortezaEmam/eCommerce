@@ -88,12 +88,10 @@ class Product extends Model
 
     public function scopeFilter($query)
     {
-        if(request()->has('attribute'))
-        {
-            foreach (request()->attribute as $attribute)
-            {
+        if (request()->has('attribute')) {
+            foreach (request()->attribute as $attribute) {
                 $query->whereHas('attributes', function ($query) use ($attribute) {
-                    foreach (explode('-', $attribute) as $index=>$item) {
+                    foreach (explode('-', $attribute) as $index => $item) {
                         if ($index == 0) {
                             $query->where('value', $item);
                         } else {
@@ -114,6 +112,26 @@ class Product extends Model
                 }
             });
 
+        }
+        if (request()->has('sortBy')) {
+            $sort = request()->sortBy;
+            switch ($sort) {
+                case 'oldest':
+                    $query->oldest();
+                    break;
+                case 'latest':
+                    $query->latest();
+                    break;
+                case 'min':
+                    $query->orderBy(ProductVariation::select('price')->whereColumn('product_variations.product_id', 'products.id')->orderBy('sale_price', 'desc')->take(1));
+                    break;
+                case 'max':
+                    $query->orderByDesc(ProductVariation::select('price')->whereColumn('product_variations.product_id', 'products.id')->orderBy('sale_price', 'desc')->take(1));
+                    break;
+                default:
+                    $query;
+                    break;
+            }
         }
 //       dd($query->toSql());
         return $query;
