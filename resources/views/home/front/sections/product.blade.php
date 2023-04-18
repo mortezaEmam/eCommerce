@@ -10,7 +10,7 @@
                 <ul>
                     <li>
                         <a href="#" data-toggle="modal"
-                           data-target="#productModal-{{$product->name}}"><i
+                           data-target="#productModal-{{$product->id}}"><i
                                 class="sli sli-magnifier"></i><span
                                 class="ht-product-action-tooltip"> مشاهده سریع
                             </span></a>

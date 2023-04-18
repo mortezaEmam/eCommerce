@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-2">
                     <div class="logo pt-40">
-                        <a href="index.html">
+                        <a href="{{route('home.index')}}">
                             <h3 class="font-weight-bold">WebProg.ir</h3>
                         </a>
                     </div>
@@ -155,7 +155,6 @@
             </div>
         </div>
     </div>
-
     <div class="header-small-mobile">
         <div class="container">
             <div class="row align-items-center">

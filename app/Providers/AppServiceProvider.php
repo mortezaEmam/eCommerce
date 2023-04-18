@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength('191');
         //Because Laravel Uses Tailwind instead of Bootstrap for Pagination
-        Paginator::useBootstrap();
+        Paginator::defaultView('home.section.pagination');
     }
 }

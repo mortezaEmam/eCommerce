@@ -5,7 +5,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset('product/fronts/product-model.js')}}"></script>
+    <script src="{{asset('js/home.js')}}"></script>
     <script>
         function filter() {
             let attributes = @json($attributes);
@@ -50,6 +50,13 @@
             let urlCurrent = `{{url()->current()}}`;
             let url = urlCurrent + '?' + decodeURIComponent($(this).serialize());
             $(location).attr('href', url);
+        });
+
+        $('#pagination li a').map(function(){
+            let decodeUrl = decodeURIComponent($(this).attr('href'));
+            if( $(this).attr('href') !== undefined ){
+                $(this).attr('href' , decodeUrl);
+            }
         });
     </script>
 @endsection
@@ -189,7 +196,6 @@
 
                     <div class="shop-bottom-area mt-35">
                         <div class="tab-content jump">
-
                             <div class="row ht-products" style="direction: rtl;">
                                 @foreach($products as $product)
                                     <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
@@ -198,13 +204,9 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="pro-pagination-style text-center mt-30">
-                            <ul class="d-flex justify-content-center">
-                                <li><a class="prev" href="#"><i class="sli sli-arrow-left"></i></a></li>
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a class="next" href="#"><i class="sli sli-arrow-right"></i></a></li>
-                            </ul>
+                        <div id="pagination" class="pro-pagination-style text-center mt-30">
+                            {{-- for url is clean use withQueryString--}}
+                            {{ $products->withQueryString()->links() }}
                         </div>
                     </div>
                 </div>

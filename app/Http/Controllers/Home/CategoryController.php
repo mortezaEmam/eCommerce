@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $attributes = $category->attributes()->where('is_filter', 1)->with('values')->get();
         $variation = $category->attributes()->where('is_variation', 1)->with('VariationValues')->first();
-        $products = $category->products()->filter()->search()->get();
+        $products = $category->products()->filter()->search()->paginate(2);
         $data = [
             'category' => $category,
             'attributes' => $attributes,
