@@ -136,4 +136,13 @@ class Product extends Model
 //       dd($query->toSql());
         return $query;
     }
+
+    public function scopeSearch($query)
+    {
+        $KeyWord = request()->search;
+        if (request()->has('search') && trim($KeyWord) != '') {
+            $query->where('name', 'LIKE', '%' . trim($KeyWord) . '%');
+        }
+        return $query;
+    }
 }
