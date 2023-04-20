@@ -64,7 +64,7 @@
 
 
 <!-- Custom fronts for this template-->
-<script src="{{asset('/fronts/admin.fronts')}}"></script>
+<script src="{{asset('/fronts/admin.js')}}"></script>
 @include('sweetalert::alert')
 
 @yield('scripts')
