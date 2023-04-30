@@ -124,11 +124,14 @@
                             </button>
                             <div class="setting-content">
                                 <ul class="text-right">
-                                    <li><a href="login.html">ورود</a></li>
-                                    <li>
-                                        <a href="register.html">ایجاد حساب</a>
-                                    </li>
-                                    <li><a href="my-account.html">پروفایل</a></li>
+                                    @auth()
+                                        <li><a href="{{route('dashboard')}}">پروفایل</a></li>
+                                    @else
+                                        <li><a href="{{route('login')}}">ورود</a></li>
+                                        <li>
+                                            <a href="{{route('register')}}">ایجاد حساب</a>
+                                        </li>
+                                    @endauth
                                 </ul>
                             </div>
                         </div>
