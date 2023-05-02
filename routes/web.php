@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController ;
 use App\Http\Controllers\Home\ProductController as HomeProductController ;
 use App\Http\Controllers\Admin\ProductController;
@@ -51,6 +52,11 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
 Route::get('/',[HomeController::class,'index'])->name('home.index');
 Route::get('/categories/{category:slug}',[HomeCategoryController::class,'show'])->name('home.categories.show');
 Route::get('/product-details/{product:slug}',[HomeProductController::class,'show'])->name('home.products.show');
+
+//Login With Google
+
+Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
+Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);
 Route::get('/test',function (){
     auth()->logout();
 });
