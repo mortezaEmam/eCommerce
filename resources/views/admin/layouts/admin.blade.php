@@ -43,6 +43,7 @@
             <div class="container-fluid">
 
                 @yield('content')
+                @include('admin.sections.alert')
 
             </div>
             <!-- /.container-fluid -->
@@ -65,7 +66,6 @@
 
 <!-- Custom fronts for this template-->
 <script src="{{asset('/fronts/admin.js')}}"></script>
-@include('sweetalert::alert')
 
 @yield('scripts')
 

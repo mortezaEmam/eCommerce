@@ -22,6 +22,7 @@
     @include('home.section.header')
     @include('home.section.mobile-off-canvas')
     @yield('content')
+    @include('admin.sections.alert')
     @include('home.section.footer')
 
 </div>

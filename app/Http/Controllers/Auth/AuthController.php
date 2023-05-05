@@ -22,7 +22,6 @@ class AuthController extends Controller
     {
         try {
             $socialite_user = Socialite::driver($provider)->user();
-            //dd($socialite_user,$socialite_user->getName());
             $user = User::query()->where('email',$socialite_user->getEmail())->first();
 
             if (blank($user)) {
@@ -36,7 +35,9 @@ class AuthController extends Controller
                 ]);
             }
             Auth::login($user,remember:true );
+            alert()->success('خوش آمدید','گرامی به سایت من خوش اومدی'.$user->name);
         } catch (\Exception $ex) {
+            alert()->error('اوه مشکلی پیش اومده!!', $ex->getMessage());
             return redirect()->route('login');
         }
 return redirect(RouteServiceProvider::HOME);
