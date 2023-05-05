@@ -7,8 +7,10 @@
     "require": {
         "php": "^8.0.2",
         "cviebrock/eloquent-sluggable": "^9.0",
+        "ghasedak/laravel": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^8.2",
+        "kavenegar/php": "^1.2",
         "laravel/fortify": "^1.17",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",

@@ -58,5 +58,16 @@ Route::get('/product-details/{product:slug}',[HomeProductController::class,'show
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);
 Route::get('/test',function (){
-    auth()->logout();
+//    $template = "قالب شماره 21045";
+//    $param1 = "14441";
+//    $receptor = "09154868372";
+//    $type = 1; // 1: sms , 2: voice
+//    $api = new \Ghasedak\GhasedakApi(env('GHASEDAKAPI_KEY'));
+//    $api->Verify( $receptor, $type, $template, $param1);
+//
+//    $sender = "1000596446";
+//    $receptor = "09154868372";
+//    $message = ".وب سرویس پیام کوتاه کاوه نگار";
+//    $api = new \Kavenegar\KavenegarApi("444D785A696C54793948476D43735753374774695A746D4748416B4A5374736A32615256506F634D5847303D");
+//    $api -> Send ( $sender,$receptor,$message,12233);
 });
