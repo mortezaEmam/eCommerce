@@ -24,6 +24,8 @@
 @import "error.scss";
 @import "footer.scss";
 
+// Import md.bootstrappersiandatetimepicker
+@import "~md.bootstrappersiandatetimepicker/dist/mds.bs.datetimepicker.style.css";
 @font-face {
   font-family: "Vazir";
   src: url("../../fonts/Vazir.eot");
