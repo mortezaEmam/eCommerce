@@ -23,7 +23,6 @@ class AuthController extends Controller
         try {
             $socialite_user = Socialite::driver($provider)->user();
             $user = User::query()->where('email',$socialite_user->getEmail())->first();
-
             if (blank($user)) {
                 $user = User::query()->create([
                     'name' => $socialite_user->getName(),
@@ -33,6 +32,7 @@ class AuthController extends Controller
                     'provider_name' => $provider,
                     'email_verified_at' => Carbon::now(),
                 ]);
+
             }
             Auth::login($user,remember:true );
             alert()->success('خوش آمدید','گرامی به سایت من خوش اومدی'.$user->name);

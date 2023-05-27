@@ -161,32 +161,43 @@
             <div class="col-lg-8 col-md-8">
                 <div class="description-review-wrapper">
                     <div class="description-review-topbar nav">
-                        <a class="active" data-toggle="tab" href="#des-details1"> توضیحات </a>
+                        <a class="{{$errors->count() > 0 ? '' : 'active'}}" data-toggle="tab" href="#des-details1"> توضیحات </a>
                         <a data-toggle="tab" href="#des-details3"> اطلاعات بیشتر </a>
-                        <a data-toggle="tab" href="#des-details2">دیدگاه(3)</a>
+                        <a class="{{$errors->count() > 0 ? 'active' : ''}}" data-toggle="tab" href="#des-details2">دیدگاه(3)</a>
                     </div>
                     <div class="tab-content description-review-bottom">
-                        <div id="des-details1" class="tab-pane active">
+                        <div id="des-details1" class="tab-pane {{$errors->count() > 0 ? '' : 'active'}}">
                             <div class="product-description-wrapper">
                                 <p class="text-justify">
-                                    {{$product->description}}
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
+                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
+                                    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
+                                    ابزارهای کاربردی می‌باشد.
                                 </p>
-
+                                <p class="text-justify">
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از
+                                    طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
+                                    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
+                                    ابزارهای کاربردی می‌باشد.
+                                </p>
                             </div>
                         </div>
                         <div id="des-details3" class="tab-pane">
                             <div class="product-anotherinfo-wrapper text-right">
                                 <ul>
-                                    @foreach($product->attributes()->with('attribute')->get() as $attribute)
-                                        <li>
-                                            <span> {{$attribute->attribute->name}} : </span>
-                                            {{$attribute->value}}
-                                        </li>
-                                    @endforeach
+                                    <li>
+                                        <span> وزن : </span>
+                                        400 g
+                                    </li>
+                                    <li><span> ابعاد : </span>10 x 10 x 15 cm </li>
+                                    <li><span> مواد بکار رفته : </span> 60% cotton, 40% polyester</li>
+                                    <li><span> اطلاعات دیگر : </span>
+                                        لورم ایپسوم متن ساختگی با تولید سادگی
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        <div id="des-details2" class="tab-pane">
+                        <div id="des-details2" class="tab-pane {{$errors->count() > 0 ? 'active' : ''}}">
 
                             <div class="review-wrapper">
                                 <div class="single-review">
@@ -261,52 +272,32 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="ratting-form-wrapper text-right">
-                                <span> نوشتن دیدگاه </span>
-
-                                <div class="star-box-wrap">
-                                    <div class="single-ratting-star">
-                                        <i class="sli sli-star"></i>
-                                    </div>
-                                    <div class="single-ratting-star">
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                    </div>
-                                    <div class="single-ratting-star">
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                    </div>
-                                    <div class="single-ratting-star">
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                    </div>
-                                    <div class="single-ratting-star">
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                        <i class="sli sli-star"></i>
-                                    </div>
+                        <div id="comments" class="ratting-form-wrapper text-right">
+                            <span> نوشتن دیدگاه </span>
+                                <div class="my-3" id="dataReadonlyReview"
+                                     data-rating-stars="5"
+                                     data-rating-value="0"
+                                     data-rating-input="#rateInput">
                                 </div>
 
-                                <div class="ratting-form">
-                                    <form action="#">
+                            <div class="ratting-form">
+                                    <form action="{{route('home.comments.store', ['product' => $product->id])}}" method="post">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="rating-form-style mb-20">
                                                     <label> متن دیدگاه : </label>
-                                                    <textarea name="Your Review"></textarea>
+                                                    <textarea name="text"></textarea>
                                                 </div>
                                             </div>
-
+                                            <input id="rateInput" type="hidden" name="rate" value="0">
                                             <div class="col-lg-12">
                                                 <div class="form-submit">
                                                     <input type="submit" value="ارسال">
                                                 </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                @include('home.section.errors')
                                             </div>
                                         </div>
                                     </form>

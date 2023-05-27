@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController ;
 use App\Http\Controllers\Home\ProductController as HomeProductController ;
@@ -35,6 +37,7 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::resource('tags', TagController::class);
     Route::resource('products', ProductController::class);
     Route::resource('banners', BannerController::class);
+    Route::resource('comments', CommentController::class);
 
     // Get Category Attributes
     Route::get('/category-attributes/{category}' ,[CategoryController::class , 'getCategoryAttributes']);
@@ -52,22 +55,10 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
 Route::get('/',[HomeController::class,'index'])->name('home.index');
 Route::get('/categories/{category:slug}',[HomeCategoryController::class,'show'])->name('home.categories.show');
 Route::get('/product-details/{product:slug}',[HomeProductController::class,'show'])->name('home.products.show');
+Route::post('/comment/{product}/',[HomeCommentController::class ,'store'])->name('home.comments.store');
 
 //Login With Google
 
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);
-Route::get('/test',function (){
-//    $template = "قالب شماره 21045";
-//    $param1 = "14441";
-//    $receptor = "09154868372";
-//    $type = 1; // 1: sms , 2: voice
-//    $api = new \Ghasedak\GhasedakApi(env('GHASEDAKAPI_KEY'));
-//    $api->Verify( $receptor, $type, $template, $param1);
-//
-//    $sender = "1000596446";
-//    $receptor = "09154868372";
-//    $message = ".وب سرویس پیام کوتاه کاوه نگار";
-//    $api = new \Kavenegar\KavenegarApi("444D785A696C54793948476D43735753374774695A746D4748416B4A5374736A32615256506F634D5847303D");
-//    $api -> Send ( $sender,$receptor,$message,12233);
-});
+
