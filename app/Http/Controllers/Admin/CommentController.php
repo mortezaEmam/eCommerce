@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,8 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $comments = Comment::query()->latest()->paginate(10);
+        return view('admin.comments.index', compact('comments'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -44,9 +45,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comment $comment)
     {
-        //
+        return view('admin.comments.show', compact('comment'));
     }
 
     /**

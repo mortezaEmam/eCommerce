@@ -47,12 +47,13 @@
                 <a class="collapse-item" href="{{route('admin.attributes.index')}}">ویژگی ها</a>
                 <a class="collapse-item" href="{{route('admin.categories.index')}}">دسته بندی ها</a>
                 <a class="collapse-item" href="{{route('admin.tags.index')}}">تگ ها</a>
+                <a class="collapse-item" href="{{route('admin.comments.index')}}">نظرات</a>
             </div>
         </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('admin.banners.index')}}">
-            <i class="fas fa-fw fa-icons"></i>
+            <i class="fas fa-fw fa-image"></i>
             <span> بنر ها </span></a>
     </li>
     <!-- Sidebar Toggler (Sidebar) -->
