@@ -49,8 +49,12 @@
                             <th>
                                 <a class="btn btn-outline-success"
                                    href="{{route('admin.comments.show',['comment' => $comment->id])}}">نمایش</a>
-{{--                                <a class="btn btn-outline-info"--}}
-{{--                                   href="{{route('admin.attributes.edit',['attribute' => $comment->id])}}">ویرایش</a>--}}
+
+                                <form action="{{route('admin.comments.destroy',['comment' => $comment->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-outline-danger  mb-4" value="حذف"/>
+                                </form>
                             </th>
                         </tr>
                     @endforeach

@@ -41,6 +41,11 @@
             </div>
             <div>
                 <a href="{{ route('admin.comments.index') }}" class="btn btn-outline-info mt-5 ">بازگشت</a>
+                @if($comment->getRawOriginal('approved'))
+                    <a href="{{ route('admin.comments.change-approved', ['comment' => $comment->id]) }}" class="btn btn-outline-danger mt-5 ">عدم تایید</a>
+                @else
+                    <a href="{{ route('admin.comments.change-approved', ['comment' => $comment->id]) }}" class="btn btn-outline-success mt-5 ">تایید</a>
+                @endif
             </div>
         </div>
     </div>
