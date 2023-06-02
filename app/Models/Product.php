@@ -145,4 +145,13 @@ class Product extends Model
         }
         return $query;
     }
+
+    public function approvedComment()
+    {
+        return $this->hasMany(Comment::class)->where('approved',1);
+    }
+    public function avgProductRateOfUser(User $user)
+    {
+        return $this->rates()->where('user_id',$user->id)->avg('rate');
+    }
 }

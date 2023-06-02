@@ -15,19 +15,10 @@
                             <div class="product-details-price variation-price">
                                 @if($product->quantity_check)
                                     @if($product->sale_check)
-                                        <span class="new">
-                                                        {{ number_format($product->sale_check->sale_price) }}
-                                                        تومان
-                                                    </span>
-                                        <span class="old">
-                                                        {{ number_format($product->sale_check->price) }}
-                                                        تومان
-                                                    </span>
+                                        <span class="new">{{ number_format($product->sale_check->sale_price) }}تومان</span>
+                                        <span class="old">{{ number_format($product->sale_check->price) }}تومان</span>
                                     @else
-                                        <span class="new">
-                                                        {{ number_format($product->price_check->price) }}
-                                                        تومان
-                                                    </span>
+                                        <span class="new">{{ number_format($product->price_check->price) }}تومان</span>
                                     @endif
                                 @else
                                     <div class="not-in-stock">
@@ -42,7 +33,7 @@
                                      data-rating-value="{{ceil($product->rates->avg('rate'))}}">
                                 </div>
                                 <span class="mx-5">|</span>
-                                <span >3 دیدگاه</span>
+                                <span >{{ceil($product->rates()->avg('rate'))}} دیدگاه</span>
                             </div>
                             <p class="text-right">
                                 {{$product->description}}

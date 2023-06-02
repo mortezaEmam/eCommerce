@@ -44,19 +44,10 @@
                 <div class="ht-product-price">
                     @if($product->quantity_check)
                         @if($product->sale_check)
-                            <span class="new">
-                                                        {{ number_format($product->sale_check->sale_price) }}
-                                                        تومان
-                                                    </span>
-                            <span class="old">
-                                                        {{ number_format($product->sale_check->price) }}
-                                                        تومان
-                                                    </span>
+                            <span class="new">{{ number_format($product->sale_check->sale_price) }}تومان</span>
+                            <span class="old">{{ number_format($product->sale_check->price) }}تومان</span>
                         @else
-                            <span class="new">
-                                                        {{ number_format($product->price_check->price) }}
-                                                        تومان
-                                                    </span>
+                            <span class="new">{{ number_format($product->price_check->price) }}تومان</span>
                         @endif
                     @else
                         <div class="not-in-stock">
@@ -77,3 +68,4 @@
     </div>
 </div>
 <!--Product End-->
+

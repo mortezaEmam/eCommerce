@@ -11,7 +11,9 @@ class ProductController extends Controller
 {
     public function show(Product $product)
     {
-        $product_category = Category::find($product->category->id);
-        return view('home.product.product_detailes', compact('product','product_category'));
+        $category = Category::find($product->category->id);
+        $products_category = $category->products()->get();
+        $approvedComments = $product->approvedComment();
+        return view('home.product.product_detailes', compact('product','products_category','approvedComments'));
     }
 }
