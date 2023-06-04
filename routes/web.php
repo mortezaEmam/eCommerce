@@ -14,6 +14,7 @@ use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\UserProfileController;
+use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,8 @@ Route::get('/',[HomeController::class,'index'])->name('home.index');
 Route::get('/categories/{category:slug}',[HomeCategoryController::class,'show'])->name('home.categories.show');
 Route::get('/product-details/{product:slug}',[HomeProductController::class,'show'])->name('home.products.show');
 Route::post('/comment/{product}/',[HomeCommentController::class ,'store'])->name('home.comments.store');
+Route::get('/add-to-wishlist/{product}/',[WishListController::class ,'add'])->name('home.wishlist.add');
+Route::get('/remove-to-wishlist/{product}/',[WishListController::class ,'remove'])->name('home.wishlist.remove');
 
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){

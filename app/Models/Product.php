@@ -154,4 +154,9 @@ class Product extends Model
     {
         return $this->rates()->where('user_id',$user->id)->avg('rate');
     }
+
+    public function checkUserWishlist($userId)
+    {
+        return $this->hasMany(Wishlist::class)->where('user_id' , $userId)->exists();
+    }
 }
