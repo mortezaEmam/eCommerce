@@ -63,4 +63,9 @@ class CommentController extends Controller
             return redirect()->back();
         }
     }
+
+    public function usersProfileIndex()
+    {
+        return view('home.users.user_profile.index');
+    }
 }
