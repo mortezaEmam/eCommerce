@@ -35,7 +35,7 @@
                                 <span class="mx-5">|</span>
                                 <span >{{ceil($product->rates()->avg('rate'))}} دیدگاه</span>
                             </div>
-                            <p class="text-right">
+                            <p class="text-right" style="overflow-wrap: anywhere">
                                 {{$product->description}}
                             </p>
                             <div class="pro-details-list text-right">

@@ -74,7 +74,7 @@
                             <span class="mx-5">|</span>
                             <span>{{$approvedComments->count()}} دیدگاه</span>
                         </div>
-                        <p class="text-right">{{$product->description}}</p>
+                        <p class="text-right" style="overflow-wrap: anywhere">{{$product->description}}</p>
                         <div class="pro-details-list text-right">
                             <ul class="text-right">
                                 @foreach($product->attributes()->with('attribute')->get() as $attribute)

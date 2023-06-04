@@ -66,6 +66,7 @@ class CommentController extends Controller
 
     public function usersProfileIndex()
     {
-        return view('home.users.user_profile.index');
+        $comments = Comment::query()->where('user_id',Auth::id())->where('approved',1)->with('product')->get();
+        return view('home.users.user_profile.index',compact('comments'));
     }
 }
