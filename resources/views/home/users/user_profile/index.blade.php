@@ -34,6 +34,9 @@
                                 @case(request()->is('profile/comments'))
                                     @include('home.users.user_profile.comments_list')
                                     @break
+                                @case(request()->is('profile/wishlists'))
+                                    @include('home.users.user_profile.wishlists')
+                                    @break
                                 @default
                                     @include('home.users.user_profile.profile-cart')
                                 @break

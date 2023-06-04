@@ -15,7 +15,7 @@
         آدرس ها
     </a>
 
-    <a href="#" class="{{ request()->is('profile/wishlist') ? 'active' : '' }}">
+    <a href="{{route('home.wishlists.users-profile-index')}}" class="{{ request()->is('profile/wishlist') ? 'active' : '' }}">
         <i class="sli sli-heart ml-1"></i>
         لیست علاقه مندی ها
     </a>

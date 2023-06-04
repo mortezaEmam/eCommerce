@@ -1,9 +1,14 @@
 <!-- Single Tab Content Start -->
 <div class="col-lg-9 col-md-8">
-    <div class="tab-content" id="comments">
+    <div class="tab-content">
         <div class="myaccount-content">
             <h3> نظرات </h3>
             <div class="review-wrapper">
+                @if($comments->isEmpty())
+                    <div class="alert alert-danger">
+                        لیست نظرات شما خالی می باشد.
+                    </div>
+                @else
                 @foreach($comments as $comment)
                     <div class="single-review">
                         <div class="review-img">
@@ -26,7 +31,7 @@
                         </div>
                     </div>
                 @endforeach
-
+                @endif
             </div>
         </div>
     </div>

@@ -68,6 +68,7 @@ Route::get('/remove-to-wishlist/{product}/',[WishListController::class ,'remove'
 Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/',[UserProfileController::class,'index'])->name('user-profile.index');
     Route::get('/comments',[HomeCommentController::class,'usersProfileIndex'])->name('comment.users-profile-index');
+    Route::get('/wishlists',[WishlistController::class,'usersProfileIndex'])->name('wishlists.users-profile-index');
 });
 
 
