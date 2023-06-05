@@ -27,7 +27,6 @@
                                 </a>
                             @endif
                         @else
-                            <a href="{{route('home.wishlist.add',['product' => $product->id])}}">
                                 @auth
                                     @if($product->checkUserWishlist(auth()->id()))
                                         <a href="{{route('home.wishlist.remove',['product' => $product->id])}}"><i class="fa fa-heart" style="color: red"></i>
@@ -43,12 +42,11 @@
                                         <span class="ht-product-action-tooltip"> افزودن به علاقه مندی ها </span>
                                     </a>
                                 @endauth
-                            </a>
                         @endauth
 
                     </li>
                     <li>
-                        <a href="#"><i class="sli sli-refresh"></i><span
+                        <a href="{{route('home.compare.add' ,['product' => $product->id])}}"><i class="sli sli-refresh"></i><span
                                 class="ht-product-action-tooltip"> مقایسه
                             </span></a>
                     </li>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
+use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\UserProfileController;
@@ -63,6 +64,9 @@ Route::get('/product-details/{product:slug}',[HomeProductController::class,'show
 Route::post('/comment/{product}/',[HomeCommentController::class ,'store'])->name('home.comments.store');
 Route::get('/add-to-wishlist/{product}/',[WishListController::class ,'add'])->name('home.wishlist.add');
 Route::get('/remove-to-wishlist/{product}/',[WishListController::class ,'remove'])->name('home.wishlist.remove');
+Route::get('/add-to-compare/{product}/',[CompareController::class ,'add'])->name('home.compare.add');
+Route::get('/remove-to-compare/{product}/',[CompareController::class ,'remove'])->name('home.compare.remove');
+Route::get('/compare',[CompareController::class ,'index'])->name('home.compare.index');
 
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){
@@ -76,3 +80,7 @@ Route::prefix('/profile')->name('home.')->group(function (){
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);
 
+//Route::get('/test',function (){
+//
+//    return \Illuminate\Support\Facades\Session::get('compare_product');
+//});
