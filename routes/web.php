@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
@@ -67,6 +68,7 @@ Route::get('/remove-to-wishlist/{product}/',[WishListController::class ,'remove'
 Route::get('/add-to-compare/{product}/',[CompareController::class ,'add'])->name('home.compare.add');
 Route::get('/remove-to-compare/{product}/',[CompareController::class ,'remove'])->name('home.compare.remove');
 Route::get('/compare',[CompareController::class ,'index'])->name('home.compare.index');
+Route::post('/add_to_cart',[CartController::class ,'add'])->name('home.cart.add');
 
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){
@@ -80,7 +82,7 @@ Route::prefix('/profile')->name('home.')->group(function (){
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);
 
-//Route::get('/test',function (){
-//
-//    return \Illuminate\Support\Facades\Session::get('compare_product');
-//});
+
+Route::get('/test',function (){
+
+});
