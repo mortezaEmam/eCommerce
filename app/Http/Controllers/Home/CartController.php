@@ -76,4 +76,20 @@ class CartController extends Controller
         return redirect()->back();
 
     }
+
+    public function remove($rowId)
+    {
+        Cart::remove($rowId);
+
+        alert()->success('با تشکر', 'محصول با موفقیت از سبد خرید شما حذف شد');
+        return redirect()->back();
+    }
+
+    public function clear()
+    {
+        Cart::clear();
+
+        alert()->warning('دقت کنید', 'سبد خرید شما پاک شد');
+        return redirect()->back();
+    }
 }

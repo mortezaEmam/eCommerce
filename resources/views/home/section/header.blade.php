@@ -21,7 +21,7 @@
                                 <li><a href="contact-us.html"> تماس با ما </a></li>
 
                                 <li class="angle-shape">
-                                    <a href="#"> فروشگاه </a>
+                                    <a href="{{route('home.index')}}"> فروشگاه </a>
 
                                     <ul class="mega-menu">
                                         @foreach($parentCategories as $parentCategory)

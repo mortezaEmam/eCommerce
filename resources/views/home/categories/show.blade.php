@@ -52,10 +52,10 @@
             $(location).attr('href', url);
         });
 
-        $('#pagination li a').map(function(){
+        $('#pagination li a').map(function () {
             let decodeUrl = decodeURIComponent($(this).attr('href'));
-            if( $(this).attr('href') !== undefined ){
-                $(this).attr('href' , decodeUrl);
+            if ($(this).attr('href') !== undefined) {
+                $(this).attr('href', decodeUrl);
             }
         });
     </script>
@@ -97,9 +97,12 @@
                             <div class="sidebar-widget-list mt-30">
                                 <ul>
                                     <li>
-                                        {{$category->parent->name}}
+                                        {{$category->parent==null?$category->name:$category->parent->name}}
                                     </li>
-                                    @foreach($category->parent->childern as $childern)
+                                    @php
+                                        $categoryChildern = $category->parent==null?$category->childern:$category->parent->childern;
+                                    @endphp
+                                    @foreach($categoryChildern as $childern)
                                         <li>
                                             <a href="{{route('home.categories.show',['category' => $childern->slug])}}"
                                                style="{{$childern->name == $category->name ? 'color: #ff3535':''}}">
@@ -193,22 +196,35 @@
                         </div>
 
                     </div>
-
-                    <div class="shop-bottom-area mt-35">
-                        <div class="tab-content jump">
-                            <div class="row ht-products" style="direction: rtl;">
-                                @foreach($products as $product)
-                                    <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
-                                        @include('home.front.sections.product')
-                                    </div>
-                                @endforeach
+                    @if(blank($products))
+                        <div class="container cart-empty-content">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 text-center">
+                                    <i class="sli sli-shield"></i>
+                                    <h2 class="font-weight-bold my-4">محصول در این دسته بندی وجود ندارد</h2>
+                                    <p class="mb-40">انبار ما از این محصول خالی هست</p>
+                                    <a href="{{route('home.index')}}"> مشاهده بقیه محصولات </a>
+                                </div>
                             </div>
                         </div>
-                        <div id="pagination" class="pro-pagination-style text-center mt-30">
-                            {{-- for url is clean use withQueryString--}}
-                            {{ $products->withQueryString()->links() }}
+                    @else
+                        <div class="shop-bottom-area mt-35">
+                            <div class="tab-content jump">
+                                <div class="row ht-products" style="direction: rtl;">
+                                    @foreach($products as $product)
+                                        <div class="col-xl-4 col-md-6 col-lg-6 col-sm-6">
+                                            @include('home.front.sections.product')
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div id="pagination" class="pro-pagination-style text-center mt-30">
+                                {{-- for url is clean use withQueryString--}}
+                                {{ $products->withQueryString()->links() }}
+                            </div>
                         </div>
-                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -221,9 +237,11 @@
         <input type="hidden" id="search_filter" name="search">
         <input id="filter-sort-by" type="hidden" name="sortBy">
     </form>
-    @foreach($products as $product)
-        @include('home.front.modal.product')
-    @endforeach
+    @if(!blank($products))
+        @foreach($products as $product)
+            @include('home.front.modal.product')
+        @endforeach
+    @endif
     </div>
 
 @endsection

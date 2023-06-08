@@ -49,10 +49,10 @@
         <div class="ht-product-content">
             <div class="ht-product-content-inner">
                 <div class="ht-product-categories">
-                    <a href="#">{{$product->category->name}}</a>
+                    <a href="{{route('home.categories.show',['category' => $product->category->slug])}}">{{$product->category->name}}</a>
                 </div>
                 <h4 class="ht-product-title text-right">
-                    <a href="product-details.html"> {{$product->name}} </a>
+                    <a href="{{route('home.products.show' ,['product' => $product->slug])}}"> {{$product->name}} </a>
                 </h4>
                 <div class="ht-product-price">
                     @if($product->quantity_check)

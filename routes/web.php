@@ -64,13 +64,15 @@ Route::get('/categories/{category:slug}',[HomeCategoryController::class,'show'])
 Route::get('/product-details/{product:slug}',[HomeProductController::class,'show'])->name('home.products.show');
 Route::post('/comment/{product}/',[HomeCommentController::class ,'store'])->name('home.comments.store');
 Route::get('/add-to-wishlist/{product}/',[WishListController::class ,'add'])->name('home.wishlist.add');
-Route::get('/remove-to-wishlist/{product}/',[WishListController::class ,'remove'])->name('home.wishlist.remove');
+Route::get('/remove-from-wishlist/{product}/',[WishListController::class ,'remove'])->name('home.wishlist.remove');
 Route::get('/add-to-compare/{product}/',[CompareController::class ,'add'])->name('home.compare.add');
-Route::get('/remove-to-compare/{product}/',[CompareController::class ,'remove'])->name('home.compare.remove');
+Route::get('/remove-from-compare/{product}/',[CompareController::class ,'remove'])->name('home.compare.remove');
 Route::get('/compare',[CompareController::class ,'index'])->name('home.compare.index');
 Route::post('/add_to_cart',[CartController::class ,'add'])->name('home.cart.add');
 Route::get('/cart',[CartController::class ,'index'])->name('home.cart.index');
 Route::put('/update-cart',[CartController::class ,'update'])->name('home.cart.update');
+Route::get('/remove-from-cart/{rowId}',[CartController::class ,'remove'])->name('home.cart.remove');
+Route::get('/clear-cart',[CartController::class ,'clear'])->name('home.cart.clear');
 
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){
