@@ -51,4 +51,29 @@ class CartController extends Controller
         alert()->success('با تشکر', 'محصول با موفقیت به سبد خرید شما افزوده شد');
         return redirect()->back();
     }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'qtybutton' => 'required',
+        ]);
+        foreach ($request->qtybutton as $rowId => $quantity)
+        {
+            $item = Cart::get($rowId);
+            if ($quantity > $item->attributes->quantity) {
+                alert()->warning('دقت کنید', 'تعداد محصول وارد شده با موجودی انبار مطابقت ندارد');
+                return redirect()->back();
+             }
+            Cart::update($rowId, array(
+                'quantity' => array(
+                    'relative' => false,//برای اینکه کلا مقدار فعلی را جای گزین مقدار قبلی کنیم راه کار این پکیج بود
+                    'value' => $quantity
+                ),
+            ));
+
+        }
+        alert()->success('با تشکر', 'سبد خرید شما با موفقیت ویرایش شد');
+        return redirect()->back();
+
+    }
 }

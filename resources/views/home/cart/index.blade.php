@@ -34,7 +34,9 @@
                         </div>
                     </div>
                 @else
-                    <form action="#">
+                    <form action="{{route('home.cart.update')}}" method="post">
+                        @csrf
+                        @method('put')
                         <div class="table-content table-responsive cart-table-content">
                             <table>
                                 <thead>
@@ -73,7 +75,7 @@
                                         </td>
                                         <td class="product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" type="text" name="qtybutton" data-max = "{{$product->attributes->quantity}}" value="{{$product->quantity}}">
+                                                <input class="cart-plus-minus-box" type="text" name="qtybutton[{{$product->id}}]" data-max = "{{$product->attributes->quantity}}" value="{{$product->quantity}}">
                                             </div>
                                         </td>
                                         <td class="product-subtotal">
@@ -95,7 +97,7 @@
                                         <a href="{{route('home.index')}}"> ادامه خرید </a>
                                     </div>
                                     <div class="cart-clear">
-                                        <button> به روز رسانی سبد خرید</button>
+                                        <button type="submit"> به روز رسانی سبد خرید</button>
                                         <a href="#"> پاک کردن سبد خرید </a>
                                     </div>
                                 </div>
