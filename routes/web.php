@@ -69,6 +69,7 @@ Route::get('/add-to-compare/{product}/',[CompareController::class ,'add'])->name
 Route::get('/remove-to-compare/{product}/',[CompareController::class ,'remove'])->name('home.compare.remove');
 Route::get('/compare',[CompareController::class ,'index'])->name('home.compare.index');
 Route::post('/add_to_cart',[CartController::class ,'add'])->name('home.cart.add');
+Route::get('/cart',[CartController::class ,'index'])->name('home.cart.index');
 
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){

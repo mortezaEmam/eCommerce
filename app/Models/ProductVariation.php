@@ -15,7 +15,7 @@ class ProductVariation extends Model
 
     protected $table = 'product_variations';
     protected $guarded = [];
-    protected $appends =['is_sale'];
+    protected $appends =['is_sale','percent_sale'];
 
     public static function StoreProductVariation($variation, $attributeId, $product, $key)
     {
@@ -64,6 +64,10 @@ class ProductVariation extends Model
 
     public function getIsSaleAttribute()
     {
-        return (($this->sale_price!=null&$this->date_on_sale_from < Carbon::now()&$this->date_on_sale_to > Carbon::now())?true:false);
+        return (($this->sale_price!=null&$this->date_on_sale_from < Carbon::now() & $this->date_on_sale_to > Carbon::now())?true:false);
+    }
+    public function getPercentSaleAttribute()
+    {
+        return $this->is_sale ? round((($this->price - $this->sale_price) / $this->price) * 100) : null;
     }
 }

@@ -10,6 +10,17 @@ use Cart;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        $data =[
+            'products_cart' => Cart::getContent(),
+            'total_cart' => Cart::getTotal(),
+            'is_empty_cart' => Cart::isEmpty(),
+            'delivery_amount_products' =>getDeliveryAmountProduct(),
+            'amount_percent_sale_product' => getPriceTotalAmountPercentProducts(),
+            ];
+        return view('home.cart.index',$data);
+    }
     public function add(Request $request)
     {
         $request->validate([

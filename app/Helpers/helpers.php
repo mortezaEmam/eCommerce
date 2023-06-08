@@ -57,3 +57,24 @@ function upload_Primary_image_product($primaryImage, $path)
 
     return $path . $file_name;
 }
+function getPriceTotalAmountPercentProducts()
+{
+    $cartTotalSaleAmount = 0;
+    foreach (Cart::getContent() as $item)
+    {
+        if($item->attributes->is_sale)
+        {
+            $cartTotalSaleAmount += $item->quantity * ($item->attributes->price - $item->attributes->sale_price);
+        }
+    }
+    return $cartTotalSaleAmount;
+}
+function getDeliveryAmountProduct()
+{
+    $get_delivery_amount_product = 0;
+    foreach (Cart::getContent() as $item)
+    {
+        $get_delivery_amount_product += $item->associatedModel->delivery_amount;
+    }
+    return $get_delivery_amount_product;
+}

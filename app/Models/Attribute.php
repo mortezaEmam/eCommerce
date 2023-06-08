@@ -29,4 +29,5 @@ class Attribute extends Model
     {
         return $this->hasMany(ProductVariation::class)->select('attribute_id','value')->distinct();
     }
+
 }
