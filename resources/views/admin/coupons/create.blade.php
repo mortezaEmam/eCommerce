@@ -6,7 +6,7 @@
 
 @section('scripts')
     <script>
-        $('#expireDate').MdPersianDateTimePicker({
+        $('#expireDate').azPersianDateTimePicker({
             targetTextSelector: '#expireInput',
             englishNumber: true,
             enableTimePicker: true,
