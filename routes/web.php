@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
@@ -42,6 +43,7 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::resource('products', ProductController::class);
     Route::resource('banners', BannerController::class);
     Route::resource('comments', CommentController::class);
+    Route::resource('coupons',CouponController::class);
 
     //get change approve comments
     Route::get('/comments/{comment}/change-approved' ,[CommentController::class , 'changeApproved'])->name('comments.change-approved');
@@ -57,7 +59,6 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     //Edit product category
     Route::get('/products/{product}/edit-category-product' ,[ProductController::class , 'editProductCategory'])->name('products.category.edit');
     Route::put('/products/{product}/update-category-product' ,[ProductController::class , 'updateProductCategory'])->name('products.updateProductCategory');
-
 });
 Route::get('/',[HomeController::class,'index'])->name('home.index');
 Route::get('/categories/{category:slug}',[HomeCategoryController::class,'show'])->name('home.categories.show');
