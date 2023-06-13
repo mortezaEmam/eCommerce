@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Coupon;
 use App\Models\File;
+use App\Models\Order;
 use Carbon\Carbon;
 use Morilog\Jalali\CalendarUtils;
 
@@ -77,4 +79,42 @@ function getDeliveryAmountProduct()
         $get_delivery_amount_product += $item->associatedModel->delivery_amount;
     }
     return $get_delivery_amount_product;
+}
+function SetCheckCoupon($code)
+{
+    $coupon = Coupon::query()->where('code',$code)->where('expired_at','>',Carbon::now())->first();
+
+    if ($coupon == null) {
+        session()->forget('coupon');
+        return ['error' => 'کد تخفیف وارد شده وجود ندارد'];
+    }
+    if(Order::query()->where('coupon_id',$coupon->id)->where('user_id',auth()->id())->where('payment_status', 1)->exists())
+    {
+        session()->forget('coupon');
+        return ['error' => 'کد تخفیف وارد شده قبلا استفاده شده است'];
+    }
+    if ($coupon->getRawOriginal('type') == 'amount') {
+        session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
+    } else {
+        $total = Cart::getTotal();
+
+        $amount = (($total * $coupon->percentage) / 100) > $coupon->max_percentage_amount ? $coupon->max_percentage_amount : (($total * $coupon->percentage) / 100);
+
+        session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $amount]);
+    }
+
+    return ['success' => 'کد تخفیف برای شما ثبت شد'];
+
+}
+function cartTotalAmount()
+{
+    if (session()->has('coupon')) {
+        if (session()->get('coupon.amount') > (\Cart::getTotal() + getDeliveryAmountProduct())) {
+            return 0;
+        } else {
+            return (\Cart::getTotal() + getDeliveryAmountProduct()) - session()->get('coupon.amount');
+        }
+    } else {
+        return \Cart::getTotal() + getDeliveryAmountProduct();
+    }
 }

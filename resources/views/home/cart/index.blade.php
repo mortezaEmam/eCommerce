@@ -113,8 +113,9 @@
                                 </div>
                                 <div class="discount-code">
                                     <p> لورم ایپسوم متن ساختگی با تولید سادگی </p>
-                                    <form>
-                                        <input type="text" required="" name="name">
+                                    <form action="{{route('home.cart.check_coupon')}}" method="post">
+                                        @csrf
+                                        <input type="text" required="required" name="code">
                                         <button class="cart-btn-2" type="submit"> ثبت</button>
                                     </form>
                                 </div>
@@ -142,6 +143,15 @@
                                     </span>
                                     </h5>
                                 @endif
+                                @if(session()->has('coupon') )
+                                    <h5>
+                                        کد تخفیف :
+                                        <span style="color: red">
+                                        {{number_format(session()->get('coupon.amount'))}}
+                                        تومان
+                                    </span>
+                                    </h5>
+                                @endif
                                 <div class="total-shipping">
                                     <h5>
                                         هزینه ارسال :
@@ -161,7 +171,7 @@
                                 <h4 class="grand-totall-title">
                                     جمع کل:
                                     <span>
-                                        {{$total_cart + $delivery_amount_products}}
+                                        {{cartTotalAmount()}}
                                         تومان
                                     </span>
                                 </h4>

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductVariation;
 use Illuminate\Http\Request;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -91,5 +92,28 @@ class CartController extends Controller
 
         alert()->warning('دقت کنید', 'سبد خرید شما پاک شد');
         return redirect()->back();
+    }
+
+    public function checkCoupon(Request $request)
+    {
+        if(!Auth::check())
+        {
+            alert()->warning('دقت کنید', 'برای استفاده از کد تخفیف ابتدا باید وارد وب سایت شوید');
+            return redirect()->back();
+        }
+        $request->validate([
+            'code'=>'required',
+        ]);
+
+        $result = SetCheckCoupon($request->code);
+
+        if (array_key_exists('error',$result))
+        {
+          alert()->error('دقت کنید',$result['error']);
+        }
+        else{
+            alert()->success('با تشکر',$result['success']);
+        }
+        return  redirect()->back();
     }
 }
