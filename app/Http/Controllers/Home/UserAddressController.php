@@ -7,6 +7,7 @@ use App\Models\Province;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserAddressController extends Controller
 {
@@ -68,7 +69,29 @@ class UserAddressController extends Controller
 
     public function update(Request $request, UserAddress $userAddress)
     {
-        //
+        $validator = validator::make($request->all(),[
+            'title' => 'required',
+            'phone' => 'required|iran_mobile',
+            'province_id' => 'required',
+            'city_id' => 'required',
+            'address' => 'required',
+            'postal_code' => 'required|iran_postal_code']);
+        if($validator->fails())
+        {
+            $validator->errors()->add('address_id',$userAddress->id);
+            return redirect()->back()->withErrors($validator, 'addressUpdate')->withInput();
+        }
+        $userAddress->update([
+            'title' => $request->title,
+            'phone' => $request->phone,
+            'province_id' => $request->province_id,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code
+        ]);
+
+        alert()->success('آدرس مورد نظر ویرایش شد', 'باتشکر');
+        return redirect()->route('home.address-users.users-profile-index');
     }
 
     public function destroy(UserAddress $userAddress)

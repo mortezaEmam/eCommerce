@@ -84,6 +84,7 @@ Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/comments',[HomeCommentController::class,'usersProfileIndex'])->name('comment.users-profile-index');
     Route::get('/wishlists',[WishlistController::class,'usersProfileIndex'])->name('wishlists.users-profile-index');
     Route::get('/address-users',[UserAddressController::class,'Index'])->name('address-users.users-profile-index');
+    Route::post('/address-users/{userAddress}',[UserAddressController::class,'Update'])->name('address-users.users-profile-update');
     Route::post('/address_users_store',[UserAddressController::class,'Store'])->name('users_profile.address_users_store');
 });
 

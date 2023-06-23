@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\City;
 use App\Models\Coupon;
 use App\Models\File;
 use App\Models\Order;
+use App\Models\Province;
 use Carbon\Carbon;
 use Morilog\Jalali\CalendarUtils;
 
@@ -117,4 +119,12 @@ function cartTotalAmount()
     } else {
         return \Cart::getTotal() + getDeliveryAmountProduct();
     }
+}
+function getProvinceName($provinceId)
+{
+    return Province::findOrFail($provinceId)->name;
+}
+function getCityName($cityId)
+{
+    return City::findOrFail($cityId)->name;
 }
