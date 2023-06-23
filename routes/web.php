@@ -77,7 +77,7 @@ Route::put('/update-cart',[CartController::class ,'update'])->name('home.cart.up
 Route::get('/remove-from-cart/{rowId}',[CartController::class ,'remove'])->name('home.cart.remove');
 Route::get('/clear-cart',[CartController::class ,'clear'])->name('home.cart.clear');
 Route::post('/check-coupon',[CartController::class ,'checkCoupon'])->name('home.cart.check_coupon');
-
+Route::get('/checkout',[CartController::class,'checkout'])->middleware(['auth'])->name('home.cart.checkout');
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/',[UserProfileController::class,'index'])->name('user-profile.index');

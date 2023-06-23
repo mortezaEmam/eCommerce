@@ -112,7 +112,7 @@
                                     <h4 class="cart-bottom-title section-bg-gray"> کد تخفیف </h4>
                                 </div>
                                 <div class="discount-code">
-                                    <p> لورم ایپسوم متن ساختگی با تولید سادگی </p>
+                                    <p>کد تخفیف را در باکس پایین وارد کنید </p>
                                     <form action="{{route('home.cart.check_coupon')}}" method="post">
                                         @csrf
                                         <input type="text" required="required" name="code">
@@ -175,7 +175,7 @@
                                         تومان
                                     </span>
                                 </h4>
-                                <a href="#"> ادامه فرآیند خرید </a>
+                                <a href="{{route('home.cart.checkout')}}"> ادامه فرآیند خرید </a>
                             </div>
                         </div>
                     </div>

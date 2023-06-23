@@ -109,7 +109,8 @@
                                                                 alt=""
                                                                 src="{{asset(Storage::Url($item->associatedModel->primary_image))}}"/></a>
                                                         <div class="item-close">
-                                                            <a href="#"><i class="sli sli-close"></i></a>
+                                                            <a href="{{route('home.cart.remove' ,['rowId'=> $item->id])}}"><i
+                                                                    class="sli sli-close"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,14 +119,16 @@
                                     </ul>
 
                                     <div class="shopping-cart-bottom">
-                                        <div class="shopping-cart-total d-flex justify-content-between align-items-center" style="direction: rtl;">
+                                        <div
+                                            class="shopping-cart-total d-flex justify-content-between align-items-center"
+                                            style="direction: rtl;">
                                             <h4>
                                                 جمع کل :
                                             </h4>
                                             <span class="shop-total">{{number_format(Cart::getTotal()).'تومان'}}</span>
                                         </div>
                                         <div class="shopping-cart-btn btn-hover text-center">
-                                            <a class="default-btn" href="checkout.html">
+                                            <a class="default-btn" href="{{route('home.cart.checkout')}}">
                                                 ثبت سفارش
                                             </a>
                                             <a class="default-btn" href="{{route('home.cart.index')}}">
@@ -238,13 +241,13 @@
                                                             </p>
                                                         @endif
                                                     </div>
-
                                                     <div class="shopping-cart-img">
                                                         <a href="{{route('home.products.show' ,['product' => $item->associatedModel->slug])}}"><img
                                                                 alt=""
                                                                 src="{{asset(Storage::Url($item->associatedModel->primary_image))}}"/></a>
                                                         <div class="item-close">
-                                                            <a href="#"><i class="sli sli-close"></i></a>
+                                                            <a href="{{route('home.cart.remove' ,['rowId'=> $item->id])}}"><i
+                                                                    class="sli sli-close"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,14 +256,16 @@
                                     </ul>
 
                                     <div class="shopping-cart-bottom">
-                                        <div class="shopping-cart-total d-flex justify-content-between align-items-center" style="direction: rtl;">
+                                        <div
+                                            class="shopping-cart-total d-flex justify-content-between align-items-center"
+                                            style="direction: rtl;">
                                             <h4>
                                                 جمع کل :
                                             </h4>
                                             <span class="shop-total">{{number_format(Cart::getTotal()).'تومان'}}</span>
                                         </div>
                                         <div class="shopping-cart-btn btn-hover text-center">
-                                            <a class="default-btn" href="checkout.html">
+                                            <a class="default-btn" href="{{route('home.cart.checkout')}}">
                                                 ثبت سفارش
                                             </a>
                                             <a class="default-btn" href="{{route('home.cart.index')}}">

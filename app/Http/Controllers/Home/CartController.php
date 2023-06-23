@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariation;
+use App\Models\Province;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Auth;
@@ -115,5 +117,24 @@ class CartController extends Controller
             alert()->success('با تشکر',$result['success']);
         }
         return  redirect()->back();
+    }
+
+    public function checkout()
+    {
+        if(\Cart::isEmpty())
+        {
+            alert()->warning('دقت کنید','سبد خرید شما خالی می باشد ابتدا محصولات مورد نظر خود را انتخاب نمایید');
+            return redirect()->route('home.index');
+        }
+        $data =[
+            'products_cart' => Cart::getContent(),
+            'total_cart' => Cart::getTotal(),
+            'is_empty_cart' => Cart::isEmpty(),
+            'delivery_amount_products' =>getDeliveryAmountProduct(),
+            'amount_percent_sale_product' => getPriceTotalAmountPercentProducts(),
+            'addresses' => UserAddress::query()->where('user_id',Auth::id())->get(),
+            'provinces' => Province::all(),
+        ];
+        return view('home.cart.checkout',$data);
     }
 }
