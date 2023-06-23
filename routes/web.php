@@ -16,6 +16,8 @@ use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\ProvinceController;
+use App\Http\Controllers\Home\UserAddressController;
 use App\Http\Controllers\Home\UserProfileController;
 use App\Http\Controllers\Home\WishListController;
 use Illuminate\Support\Facades\Route;
@@ -81,9 +83,11 @@ Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/',[UserProfileController::class,'index'])->name('user-profile.index');
     Route::get('/comments',[HomeCommentController::class,'usersProfileIndex'])->name('comment.users-profile-index');
     Route::get('/wishlists',[WishlistController::class,'usersProfileIndex'])->name('wishlists.users-profile-index');
+    Route::get('/address-users',[UserAddressController::class,'Index'])->name('address-users.users-profile-index');
+    Route::post('/address_users_store',[UserAddressController::class,'Store'])->name('users_profile.address_users_store');
 });
 
-
+Route::post('provinces/get-cities', [ProvinceController::class, 'getCities'])->name('provinces.get-cities');
 //Login With Google
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);

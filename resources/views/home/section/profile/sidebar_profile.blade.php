@@ -10,7 +10,7 @@
         سفارشات
     </a>
 
-    <a href="#" class="{{ request()->is('profile/addresses') ? 'active' : '' }}">
+    <a href="{{route('home.address-users.users-profile-index')}}" class="{{ request()->is('profile/address-users') ? 'active' : '' }}">
         <i class="sli sli-map ml-1"></i>
         آدرس ها
     </a>

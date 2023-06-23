@@ -37,6 +37,9 @@
                                 @case(request()->is('profile/wishlists'))
                                     @include('home.users.user_profile.wishlists')
                                     @break
+                                @case(request()->is('profile/address-users'))
+                                    @include('home.users.user_profile.user_address_cart')
+                                    @break
                                 @default
                                     @include('home.users.user_profile.profile-cart')
                                 @break
