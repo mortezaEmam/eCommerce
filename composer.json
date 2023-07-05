@@ -9,6 +9,7 @@
         "anetwork/validation": "^2.3",
         "cviebrock/eloquent-sluggable": "^9.0",
         "darryldecode/cart": "~4.0",
+        "doctrine/dbal": "^3.6",
         "ghasedak/laravel": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
         "hekmatinasser/verta": "^8.2",

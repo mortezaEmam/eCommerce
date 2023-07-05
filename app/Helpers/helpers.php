@@ -64,7 +64,7 @@ function upload_Primary_image_product($primaryImage, $path)
 function getPriceTotalAmountPercentProducts()
 {
     $cartTotalSaleAmount = 0;
-    foreach (Cart::getContent() as $item)
+    foreach (\Cart::getContent() as $item)
     {
         if($item->attributes->is_sale)
         {
@@ -76,13 +76,13 @@ function getPriceTotalAmountPercentProducts()
 function getDeliveryAmountProduct()
 {
     $get_delivery_amount_product = 0;
-    foreach (Cart::getContent() as $item)
+    foreach (\Cart::getContent() as $item)
     {
         $get_delivery_amount_product += $item->associatedModel->delivery_amount;
     }
     return $get_delivery_amount_product;
 }
-function SetCheckCoupon($code)
+function checkCoupon($code)
 {
     $coupon = Coupon::query()->where('code',$code)->where('expired_at','>',Carbon::now())->first();
 
@@ -98,7 +98,7 @@ function SetCheckCoupon($code)
     if ($coupon->getRawOriginal('type') == 'amount') {
         session()->put('coupon', ['id' => $coupon->id, 'code' => $coupon->code, 'amount' => $coupon->amount]);
     } else {
-        $total = Cart::getTotal();
+        $total = \Cart::getTotal();
 
         $amount = (($total * $coupon->percentage) / 100) > $coupon->max_percentage_amount ? $coupon->max_percentage_amount : (($total * $coupon->percentage) / 100);
 

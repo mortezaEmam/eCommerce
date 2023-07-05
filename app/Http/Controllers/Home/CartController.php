@@ -107,7 +107,7 @@ class CartController extends Controller
             'code'=>'required',
         ]);
 
-        $result = SetCheckCoupon($request->code);
+        $result = checkCoupon($request->code);
 
         if (array_key_exists('error',$result))
         {

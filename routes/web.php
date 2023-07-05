@@ -15,6 +15,7 @@ use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
 use App\Http\Controllers\Home\CommentController as HomeCommentController;
 use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\ProvinceController;
 use App\Http\Controllers\Home\UserAddressController;
@@ -78,6 +79,10 @@ Route::get('/remove-from-cart/{rowId}',[CartController::class ,'remove'])->name(
 Route::get('/clear-cart',[CartController::class ,'clear'])->name('home.cart.clear');
 Route::post('/check-coupon',[CartController::class ,'checkCoupon'])->name('home.cart.check_coupon');
 Route::get('/checkout',[CartController::class,'checkout'])->middleware(['auth'])->name('home.cart.checkout');
+
+Route::post('/payment',[PaymentController::class,'payment'])->name('home.payment');
+Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
+
 //Routes users_profile
 Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/',[UserProfileController::class,'index'])->name('user-profile.index');
