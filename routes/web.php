@@ -18,6 +18,8 @@ use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
 use App\Http\Controllers\Home\OrderController as HomeOrderController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Home\ProvinceController;
 use App\Http\Controllers\Home\UserAddressController;
 use App\Http\Controllers\Home\UserProfileController;
@@ -48,7 +50,8 @@ Route::prefix('admin-panel/management')->name('admin.')->group(function (){
     Route::resource('banners', BannerController::class);
     Route::resource('comments', CommentController::class);
     Route::resource('coupons',CouponController::class);
-
+    Route::resource('orders', AdminOrderController::class);
+    Route::resource('transactions', TransactionController::class);
     //get change approve comments
     Route::get('/comments/{comment}/change-approved' ,[CommentController::class , 'changeApproved'])->name('comments.change-approved');
 

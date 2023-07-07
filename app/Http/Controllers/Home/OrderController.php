@@ -18,7 +18,7 @@ class OrderController extends Controller
 
     public function showOrderDetail(Request $request)
     {
-        $order = Order::query()->findOrFail($request->order_id)->with('orderItems');
+        $order = Order::query()->findOrFail($request->order_id);
         $order_details = $order->orderItems;
 
         $view = view('home.users.user_profile.sections.model_order_detail',compact('order_details'))->render();

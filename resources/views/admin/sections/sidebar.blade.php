@@ -49,6 +49,33 @@
     </li>
 
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        سفارشات
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true"
+           aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span> سفارشات </span>
+        </a>
+        <div id="collapseOrders" class="collapse
+        {{ request()->is('admin-panel/management/orders*') ? 'show' : ''}}
+        {{ request()->is('admin-panel/management/transactions*') ? 'show' : ''}}
+        {{ request()->is('admin-panel/management/coupons*') ? 'show' : ''}}
+        " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ request()->is('admin-panel/management/orders*') ? 'active' : ''}}" href="{{ route('admin.orders.index') }}">سفارشات</a>
+                <a class="collapse-item {{ request()->is('admin-panel/management/transactions*') ? 'active' : ''}}" href="{{ route('admin.transactions.index') }}">تراکنش ها</a>
+                <a class="collapse-item {{ request()->is('admin-panel/management/coupons*') ? 'active' : ''}}" href="{{ route('admin.coupons.index') }}">کوپن ها</a>
+            </div>
+        </div>
+    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -65,26 +92,6 @@
         <div id="collapsePagesSettings" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{route('admin.banners.index')}}">بنر ها</a>
-            </div>
-        </div>
-    </li>
-
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        سفارشات
-    </div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesOrders" aria-expanded="false" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-cart-plus"></i>
-            <span> سفارشات </span>
-        </a>
-        <div id="collapsePagesOrders" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('admin.coupons.index')}}">کوپن ها</a>
             </div>
         </div>
     </li>
