@@ -17,6 +17,7 @@ use App\Http\Controllers\Home\CompareController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\PaymentController;
 use App\Http\Controllers\Home\ProductController as HomeProductController;
+use App\Http\Controllers\Home\OrderController as HomeOrderController;
 use App\Http\Controllers\Home\ProvinceController;
 use App\Http\Controllers\Home\UserAddressController;
 use App\Http\Controllers\Home\UserProfileController;
@@ -88,9 +89,12 @@ Route::prefix('/profile')->name('home.')->group(function (){
     Route::get('/',[UserProfileController::class,'index'])->name('user-profile.index');
     Route::get('/comments',[HomeCommentController::class,'usersProfileIndex'])->name('comment.users-profile-index');
     Route::get('/wishlists',[WishlistController::class,'usersProfileIndex'])->name('wishlists.users-profile-index');
+    Route::get('/orders',[HomeOrderController::class,'usersProfileIndex'])->name('orders.users-profile-index');
     Route::get('/address-users',[UserAddressController::class,'Index'])->name('address-users.users-profile-index');
     Route::post('/address-users/{userAddress}',[UserAddressController::class,'Update'])->name('address-users.users-profile-update');
     Route::post('/address_users_store',[UserAddressController::class,'Store'])->name('users_profile.address_users_store');
+    Route::post('/get_show_orders',[HomeOrderController::class,'showOrderDetail'])->name('profile.get_show_order_detail');
+
 });
 
 Route::post('provinces/get-cities', [ProvinceController::class, 'getCities'])->name('provinces.get-cities');

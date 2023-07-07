@@ -2,7 +2,7 @@
 <div class="ht-product ht-product-action-on-hover ht-product-category-right-bottom mb-30">
     <div class="ht-product-inner">
         <div class="ht-product-image-wrap">
-            <a href="{{route('home.products.show',['product' => $product])}}" class="ht-product-image">
+            <a href="{{route('home.products.show',['product' => $product->slug])}}" class="ht-product-image">
                 <img src="{{Storage::url($product->primary_image)}}" height="220" width="90"
                      alt="Universal Product Style"/>
             </a>

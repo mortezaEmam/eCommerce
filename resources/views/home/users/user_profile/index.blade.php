@@ -40,6 +40,9 @@
                                 @case(request()->is('profile/address-users'))
                                     @include('home.users.user_profile.user_address_cart')
                                     @break
+                                @case(request()->is('profile/orders'))
+                                    @include('home.users.user_profile.orders')
+                                    @break
                                 @default
                                     @include('home.users.user_profile.profile-cart')
                                 @break

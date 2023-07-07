@@ -5,7 +5,7 @@
         پروفایل
     </a>
 
-    <a href="#" class="{{ request()->is('profile/orders') ? 'active' : '' }}">
+    <a href="{{route('home.orders.users-profile-index')}}" class="{{ request()->is('profile/orders') ? 'active' : '' }}">
         <i class="sli sli-basket ml-1"></i>
         سفارشات
     </a>
