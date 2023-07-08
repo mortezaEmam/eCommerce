@@ -84,6 +84,11 @@ Route::get('/clear-cart',[CartController::class ,'clear'])->name('home.cart.clea
 Route::post('/check-coupon',[CartController::class ,'checkCoupon'])->name('home.cart.check_coupon');
 Route::get('/checkout',[CartController::class,'checkout'])->middleware(['auth'])->name('home.cart.checkout');
 
+
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('home.about-us');
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('home.contact-us');
+Route::post('/contact-us-form', [HomeController::class, 'contactUsForm'])->name('home.contact-us.form');
+
 Route::post('/payment',[PaymentController::class,'payment'])->name('home.payment');
 Route::get('/payment-verify/{gatewayName}', [PaymentController::class, 'paymentVerify'])->name('home.payment_verify');
 
@@ -101,6 +106,8 @@ Route::prefix('/profile')->name('home.')->group(function (){
 });
 
 Route::post('provinces/get-cities', [ProvinceController::class, 'getCities'])->name('provinces.get-cities');
+
+
 //Login With Google
 Route::get('/login/{provider}',[AuthController::class,'RedirectToProvider'])->name('auth.provider-to-redirect');
 Route::get('/login/{provider}/callback',[AuthController::class,'handelProviderCallback']);

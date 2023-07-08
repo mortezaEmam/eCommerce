@@ -3,10 +3,10 @@
         <div class="footer-top text-center pt-45 pb-45">
             <nav>
                 <ul>
-                    <li><a href="index.html">صفحه ای اصلی </a></li>
-                    <li><a href="shop.html">فروشگاه </a></li>
-                    <li><a href="contact-us.html">تماس با ما </a></li>
-                    <li><a href="about-us.html">ارتباط با ما </a></li>
+                    <li><a href="{{route('home.index')}}">صفحه ای اصلی </a></li>
+                    <li><a href="{{route('home.index')}}">فروشگاه </a></li>
+                    <li><a href="{{route('home.contact-us')}}">تماس با ما </a></li>
+                    <li><a href="{{route('home.about-us')}}">ارتباط با ما </a></li>
                 </ul>
             </nav>
         </div>
@@ -16,10 +16,35 @@
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-5 col-12">
                     <div class="footer-social pb-20">
-                        <a href="#">اینستاگرام</a>
-                        <a href="#">تویتر</a>
-                        <a href="#">فیسبوک</a>
-                        <a href="#">لینکدین</a>
+                        @if(isset($setting->instagram))
+                            <div class="contact-info-icon">
+                                <a href="{{$setting->instagram}}" target="_blank">
+                                    <i class="sli sli-social-instagram"></i>
+                                </a>
+                            </div>
+                        @endif
+                        @if(isset($setting->facebook))
+                            <div class="contact-info-icon">
+                                <a href="{{$setting->facebook}}" target="_blank">
+                                    <i class="sli sli-social-facebook"></i>
+                                </a>
+                            </div>
+                        @endif
+                        @if(isset($setting->github))
+                            <div class="contact-info-icon">
+                                <a href="{{$setting->github}}" target="_blank">
+                                    <i class="sli sli-social-github"></i>
+                                </a>
+                            </div>
+                        @endif
+                        @if(isset($setting->telegram))
+                            <div class="contact-info-icon">
+                                <a href="{{$setting->telegram }}" target="_blank">
+                                    <i class="sli sli-social-tumblr"></i>
+                                </a>
+
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">

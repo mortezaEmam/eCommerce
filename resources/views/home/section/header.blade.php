@@ -15,13 +15,13 @@
                         <nav>
                             <ul>
                                 <li class="angle-shape">
-                                    <a href="about_us.html"> ارتباط با ما </a>
+                                    <a href="{{route('home.about-us')}}"> ارتباط با ما </a>
                                 </li>
 
-                                <li><a href="contact-us.html"> تماس با ما </a></li>
+                                <li><a href="{{route('home.contact-us')}}"> تماس با ما </a></li>
 
                                 <li class="angle-shape">
-                                    <a href="{{route('home.index')}}"> فروشگاه </a>
+                                    <a href="#"> فروشگاه </a>
 
                                     <ul class="mega-menu">
                                         @foreach($parentCategories as $parentCategory)
@@ -42,7 +42,7 @@
                                 </li>
 
                                 <li class="angle-shape">
-                                    <a href="{{route('home.index')}}l"> صفحه اصلی </a>
+                                    <a href="{{route('home.index')}}"> صفحه اصلی </a>
                                 </li>
                             </ul>
                         </nav>
