@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\ContactUs;
 use App\Models\Setting;
+use App\Rules\ReCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +44,7 @@ class HomeController extends Controller
             'email' => 'required|email',
             'subject' => 'required|string|min:4|max:100',
             'text' => 'required|string|min:4|max:3000',
+            'g-recaptcha-response' => ['required', new ReCaptcha]
         ]);
 
         ContactUs::create([

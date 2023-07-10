@@ -11,6 +11,7 @@
 @endsection
 
 @section('scripts')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
@@ -153,13 +154,23 @@
                             </p>
                             @enderror
 
-                            <div id="contact_us_id"></div>
-                            @error('g-recaptcha-response')
-                            <p class="input-error-validation">
-                                <strong>{{ $message }}</strong>
-                            </p>
-                            @enderror
-
+{{--                            <div id="contact_us_id"></div>--}}
+{{--                            @error('g-recaptcha-response')--}}
+{{--                            <p class="input-error-validation">--}}
+{{--                                <strong>{{ $message }}</strong>--}}
+{{--                            </p>--}}
+{{--                            @enderror--}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <strong>ReCaptcha:</strong>
+                                        <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                                        @if ($errors->has('g-recaptcha-response'))
+                                            <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <button class="submit" type="submit"> ارسال پیام</button>
                         </form>
                     </div>
