@@ -17,7 +17,26 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span> داشبورد </span></a>
     </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        کاربران
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="false" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-users"></i>
+            <span> کاربران </span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{route('admin.users.index')}}">لیست کاربران</a>
+                <a class="collapse-item" href="">نقش ها</a>
+                <a class="collapse-item" href="">پرمیژن ها</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 

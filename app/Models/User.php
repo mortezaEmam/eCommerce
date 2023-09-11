@@ -42,5 +42,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProductRates::class);
     }
-
+    public function getIsStatusAttribute($is_status)
+    {
+        return $is_status ? 'فعال' :'بلاک شده';
+    }
 }

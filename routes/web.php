@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Home\CategoryController as HomeCategoryController;
@@ -43,6 +44,7 @@ Route::get('/admin-panel/dashboard', function () {
 Route::prefix('admin-panel/management')->name('admin.')->group(function (){
 
     Route::resource('brands', BrandController::class);
+    Route::resource('users', UserController::class);
     Route::resource('attributes', AttributeController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
