@@ -199,6 +199,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class
 
 
     ],
