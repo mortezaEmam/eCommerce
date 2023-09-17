@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 
 @section('title')
-    list permissions
+    list roles
 @endsection
 
 @section('content')
@@ -10,10 +10,10 @@
 
         <div class="col-xl-12 col-md-12 mb-4 p-md-5 bg-white">
             <div class="d-flex justify-content-between mb-4">
-                <h5 class="font-weight-bold">لیست پرمیژن ها ({{ $permissions->total() }})</h5>
-                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.permissions.create') }}">
+                <h5 class="font-weight-bold">لیست نقش های کاربری ({{ $roles->total() }})</h5>
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.roles.create') }}">
                     <i class="fa fa-plus"></i>
-                    ایجاد پرمیژن
+                    ایجاد نقش
                 </a>
             </div>
 
@@ -30,19 +30,20 @@
                     </thead>
                     <tbody>
 
-                    @foreach($permissions as $key => $permission)
+                    @foreach($roles as $key => $role)
                         <tr>
                             <th>
-                                {{$permissions->firstItem() + $key}}
+                                {{$roles->firstItem() + $key}}
                             </th>
                             <th>
-                                {{$permission->display_name}}
+                                {{$role->display_name}}
                             </th>
                             <th>
-                                {{$permission->name}}
+                                {{$role->name}}
                             </th>
                             <th>
-                                <a class="btn btn-outline-info" href="{{route('admin.permissions.edit',['permission' => $permission->id])}}">ویرایش</a>
+                                <a class="btn btn-outline-success" href="{{route('admin.roles.show',['role' => $role->id])}}">نمایش</a>
+                                <a class="btn btn-outline-info" href="{{route('admin.roles.edit',['role' => $role->id])}}">ویرایش</a>
                             </th>
                         </tr>
                     @endforeach
@@ -50,7 +51,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center mt-5">
-                {{ $permissions->render() }}
+                {{ $roles->render() }}
             </div>
         </div>
     </div>
