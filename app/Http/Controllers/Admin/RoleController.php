@@ -29,19 +29,13 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('admin.roles.create',compact('permissions'));
+        return view('admin.roles.create', compact('permissions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:roles,name',
             'display_name' => 'required',
         ]);
         try {
@@ -53,37 +47,41 @@ class RoleController extends Controller
             ]);
 
             $permissions = $request->except('name', 'display_name', '_token');
-            $role->givePermissionTo($permissions);
+            $role->givePermissionTo([$permissions]);
 
             DB::commit();
+
+            alert()->success('باتشکر', 'نقش مورد نظر ایجاد شد');
+            return redirect()->route('admin.roles.index');
+
         } catch (\Exception $e) {
+
             DB::rollBack();
             alert()->success('خطا', $e->getMessage());
             return redirect()->back();
         }
-        alert()->success('باتشکر', 'نقش مورد نظر ایجاد شد');
-        return redirect()->route('admin.roles.index');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
     {
-        $data=[
+        $data = [
             'role' => $role,
             'permissions_role' => $role->permissions,
-            ];
-        return view('admin.roles.show',$data);
+        ];
+        return view('admin.roles.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -97,20 +95,20 @@ class RoleController extends Controller
             'role_permissions' => $role_permissions,
         ];
 
-        return view('admin.roles.edit',$data);
+        return view('admin.roles.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:roles,name,' . $role->id,
             'display_name' => 'required',
         ]);
         try {
@@ -119,22 +117,26 @@ class RoleController extends Controller
                 'display_name' => $request->display_name,
                 'name' => $request->name
             ]);
-            $permissions = $request->except('_method','name', 'display_name', '_token');
+            $permissions = $request->except('_method', 'name', 'display_name', '_token');
             $role->syncPermissions($permissions);
             DB::commit();
+            alert()->success('باتشکر', 'نقش مورد نظر ویرایش شد');
+
+            return redirect()->route('admin.roles.index');
+
         } catch (\Exception $e) {
             DB::rollBack();
+
             alert()->success('خطا', $e->getMessage());
             return redirect()->back();
         }
-        alert()->success('باتشکر', 'نقش مورد نظر ویرایش شد');
-        return redirect()->route('admin.roles.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

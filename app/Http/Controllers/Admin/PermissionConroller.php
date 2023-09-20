@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
+use Exception;
 use Illuminate\Http\Request;
 
 class PermissionConroller extends Controller
@@ -22,17 +23,22 @@ class PermissionConroller extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:permissions,name',
             'display_name' => 'required',
         ]);
-        Permission::query()->create([
-            'display_name' => $request->display_name,
-            'name' => $request->name,
-            'guard_name' => 'web',
-        ]);
+        try {
+            Permission::query()->create([
+                'display_name' => $request->display_name,
+                'name' => $request->name,
+                'guard_name' => 'web',
+            ]);
+            alert()->success('باتشکر', 'پرمیژن مورد نظر ایجاد شد');
+            return redirect()->route('admin.permissions.index');
+        } catch (Exception $e) {
+            alert()->success('اوه', $e->getMessage());
+            return redirect()->route('admin.permissions.index');
+        }
 
-        alert()->success('باتشکر','پرمیژن مورد نظر ایجاد شد');
-        return redirect()->route('admin.permissions.index');
     }
 
     public function edit(Permission $permission)
@@ -43,16 +49,23 @@ class PermissionConroller extends Controller
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:permissions,name,'.$permission->id,
             'display_name' => 'required',
         ]);
-        $permission->update([
-            'display_name' => $request->display_name,
-            'name' => $request->name,
-        ]);
 
-        alert()->success('باتشکر','پرمیژن مورد نظر ویرایش شد');
-        return redirect()->route('admin.permissions.index');
+        try {
+            $permission->update([
+                'display_name' => $request->display_name,
+                'name' => $request->name,
+            ]);
+
+            alert()->success('باتشکر', 'پرمیژن مورد نظر ویرایش شد');
+            return redirect()->route('admin.permissions.index');
+
+        } catch (\Exception $e) {
+            alert()->success('اوه', $e->getMessage());
+            return redirect()->route('admin.permissions.index');
+        }
     }
 
 }
