@@ -46,15 +46,15 @@ Route::get('/admin-panel/dashboard', function () {
 Route::prefix('admin-panel/management')->name('admin.')->group(function (){
 
     Route::resource('brands', BrandController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->middleware('role:admin');
     Route::resource('attributes', AttributeController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('products', ProductController::class)->middleware('role:admin|permission:create-product');
     Route::resource('banners', BannerController::class);
-    Route::resource('comments', CommentController::class);
+    Route::resource('comments', CommentController::class)->middleware('permission:create-article');
     Route::resource('coupons',CouponController::class);
-    Route::resource('orders', AdminOrderController::class);
+    Route::resource('orders', AdminOrderController::class)->middleware('role:admin');
     Route::resource('transactions', TransactionController::class);
     Route::resource('permissions', PermissionConroller::class);
     Route::resource('roles', RoleController::class);
